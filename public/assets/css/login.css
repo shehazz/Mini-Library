@@ -1,0 +1,39 @@
+:root {
+    --main: #34495E;
+    --main-dark: #2C3E50;
+    --main-light: #4E6A85;
+    --bg: #F4F7F9;
+    --card: #FFFFFF;
+    --sidebar-bg: #F8FAF9;
+    --accent: #0891B2;
+    --success: #6B8E61;
+    --danger: #E74C3C;
+    --text-dark: #2C3E50;
+    --text-muted: #7F8C8D;
+    --border: #DCE4EC;
+}
+
+.cover {
+    background: var(--accent);
+}
+.button {
+    background-color: var(--accent);
+    color: var(--bg);
+    border: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: inline-flex;
+}
+
+.button:hover {
+    background-color: var(--main);
+    color: var(--bg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
