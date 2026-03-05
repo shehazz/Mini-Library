@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# Mini-Library
-=======
 📚 Mini Library Management System
 
 A lightweight, efficient database-driven application to manage book inventories, track unique copies, and handle automated overdue fine calculations.
@@ -28,4 +25,3 @@ Overdue Fines: Daily rates.
 
 Role definition table.
 - role(roleid(PK, INT 1, NN), role(VARCHAR 10, NN))
->>>>>>> 54e04f8 (Initial upload to new repository)
