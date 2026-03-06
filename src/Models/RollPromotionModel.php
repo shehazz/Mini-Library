@@ -120,7 +120,8 @@ class RollPromotionModel extends DBConnection
 
     public function searchUsers($searchTerm)
     {
-        $like = "%{$searchTerm}%";
+        $escaped = str_replace(['\\', '%', '_'], ['\\\\', '\\%', '\\_'], $searchTerm);
+        $like = "%{$escaped}%";
         $query = "SELECT u.id, u.username, u.name, u.nic, u.email, u.roleid, r.role 
                   FROM user u LEFT JOIN role r ON u.roleid = r.roleid 
                   WHERE u.name LIKE ? OR u.email LIKE ? OR u.username LIKE ? 

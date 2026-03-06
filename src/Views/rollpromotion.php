@@ -29,16 +29,16 @@ if (isset($_POST['action'])) {
             echo json_encode(['success' => true, 'data' => $userController->getAllRoles()]);
             break;
         case 'addRole':
-            $userController->addRole();
+            echo json_encode($userController->addRole());
             break;
         case 'updateUser':
-            $userController->updateUser();
+            echo json_encode($userController->updateUser());
             break;
         case 'deleteUser':
-            $userController->deleteUser();
+            echo json_encode($userController->deleteUser());
             break;
         case 'searchUsers':
-            $userController->searchUsers();
+            echo json_encode($userController->searchUsers());
             break;
         default:
             echo json_encode(['success' => false, 'message' => 'Invalid action']);
@@ -80,6 +80,9 @@ $roles = $userController->getAllRoles();
                 <div class="col">
                     <h4 class="fw-bold mb-1">Update and Grant permissions</h4>
                     <p class="text-muted small mb-0">Control system access levels.</p>
+                    <button class="btn btn-dark btn-sm mt-2 rounded-3" data-bs-toggle="modal" data-bs-target="#addModal">
+                        <i class="bi bi-person-plus me-1"></i> Assign Role
+                    </button>
                 </div>
                 <div class="col-md-3 mt-3 mt-md-0">
                     <div class="input-group input-group-sm">
@@ -155,6 +158,43 @@ $roles = $userController->getAllRoles();
             </div>
         </div>
 
+        <!-- Add Role Modal -->
+        <div class="modal fade" id="addModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow-lg rounded-4 text-center">
+                    <div class="modal-body p-5">
+                        <div class="bg-success-subtle text-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                            style="width: 60px; height: 60px;">
+                            <i class="bi bi-person-check fs-3"></i>
+                        </div>
+                        <h5 class="fw-bold">Assign Role</h5>
+                        <p class="text-muted small mb-4">Find a user by NIC and Email, then assign a role.</p>
+                        <form id="addRoleForm">
+                            <div class="mb-3 text-start">
+                                <label class="form-label small fw-bold text-muted text-uppercase">NIC</label>
+                                <input type="text" id="addRoleNic" class="form-control bg-light border-0 p-3 rounded-3" required>
+                            </div>
+                            <div class="mb-3 text-start">
+                                <label class="form-label small fw-bold text-muted text-uppercase">Email</label>
+                                <input type="email" id="addRoleEmail" class="form-control bg-light border-0 p-3 rounded-3" required>
+                            </div>
+                            <div class="mb-3 text-start">
+                                <label class="form-label small fw-bold text-muted text-uppercase">Role</label>
+                                <select id="addRoleSelect" class="form-select bg-light border-0 p-3 rounded-3" required>
+                                    <option value="" disabled selected>Select a role</option>
+                                    <?php foreach ($roles as $role): ?>
+                                        <option value="<?php echo $role['roleid']; ?>"><?php echo htmlspecialchars($role['role']); ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-dark w-100 p-3 fw-bold rounded-3 mb-2">Assign Role</button>
+                            <button type="button" class="btn btn-light w-100 p-3 fw-bold rounded-3 text-muted" data-bs-dismiss="modal">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Update User Modal -->
         <div class="modal fade" id="updateModal" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
@@ -202,6 +242,13 @@ $roles = $userController->getAllRoles();
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <script>
+            // XSS-safe escape helper
+            function esc(str) {
+                const d = document.createElement('div');
+                d.appendChild(document.createTextNode(str ?? ''));
+                return d.innerHTML;
+            }
+
             // Delete user
             function deleteUser(userId) {
                 if (!confirm('Are you sure you want to delete this user?')) return;
@@ -303,11 +350,13 @@ $roles = $userController->getAllRoles();
             });
 
             // Search users
+            const allUsers = <?php echo json_encode($users); ?>;
+
             document.getElementById('searchInput').addEventListener('keyup', function() {
                 const searchTerm = this.value;
 
                 if (searchTerm.length === 0) {
-                    location.reload();
+                    updateUserTable(allUsers);
                     return;
                 }
 
@@ -340,13 +389,13 @@ $roles = $userController->getAllRoles();
                         <td class="ps-4 py-3">
                             <div class="text-muted small font-monospace">#${String(user.id).padStart(5, '0')}</div>
                         </td>
-                        <td class="py-3"><div class="fw-bold text-dark small">${user.name}</div></td>
-                        <td class="py-3"><div class="small text-muted font-monospace">${user.username}</div></td>
-                        <td class="py-3"><div class="small">${user.nic}</div></td>
-                        <td class="py-3"><div class="small">${user.email}</div></td>
+                        <td class="py-3"><div class="fw-bold text-dark small">${esc(user.name)}</div></td>
+                        <td class="py-3"><div class="small text-muted font-monospace">${esc(user.username)}</div></td>
+                        <td class="py-3"><div class="small">${esc(user.nic)}</div></td>
+                        <td class="py-3"><div class="small">${esc(user.email)}</div></td>
                         <td class="py-3 text-center">
                             <span class="badge bg-white text-dark border px-3 py-2 fw-semibold rounded-3 small">
-                                ${user.role || 'No Role'}
+                                ${esc(user.role) || 'No Role'}
                             </span>
                         </td>
                         <td class="pe-4 py-3 text-end">
