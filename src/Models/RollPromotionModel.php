@@ -67,20 +67,6 @@ class RollPromotionModel extends DBConnection
         return [];
     }
 
-    public function createUser($username, $password, $name, $nic, $email, $roleId)
-    {
-        
-        $query = "INSERT INTO user (username, password, name, nic, email, roleid) VALUES (?, ?, ?, ?, ?, ?)";
-
-        if ($stmt = $this->conn->prepare($query)) {
-            $stmt->bind_param("sssssi", $username, $password, $name, $nic, $email, $roleId);
-            $result = $stmt->execute();
-            $stmt->close();
-            return $result;
-        }
-        return false;
-    }
-
     public function addRoleToUser($userId, $roleId)
     {
         $query = "UPDATE user SET roleid = ? WHERE id = ?";
@@ -97,8 +83,8 @@ class RollPromotionModel extends DBConnection
 
     public function updateUser($userId, $name, $username, $email, $password, $roleId)
     {
-        
-        if (!empty($password)) {
+        // Controller passes null for password if unchanged, or a hashed string if changed
+        if ($password !== null) {
             $query = "UPDATE user SET name = ?, username = ?, email = ?, password = ?, roleid = ? WHERE id = ?";
             if ($stmt = $this->conn->prepare($query)) {
                 $stmt->bind_param("ssssii", $name, $username, $email, $password, $roleId, $userId);

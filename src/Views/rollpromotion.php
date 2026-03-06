@@ -2,11 +2,59 @@
 require_once '../Models/RollPromotionModel.php';
 
 $userController = new RolePromotionController();
-$allUsers = $userController->getAllUsers();
-$allRoles = $userController->getAllRoles();
 
-$users = $allUsers['data'] ?? [];
-$roles = $allRoles['data'] ?? [];
+// Router — handles all AJAX POST requests from the page
+if (isset($_POST['action'])) {
+    header('Content-Type: application/json');
+
+    if (!isset($_SESSION['username'])) {
+        echo json_encode(['success' => false, 'message' => 'Unauthorized']);
+        exit();
+    }
+
+    $action = $_POST['action'];
+
+    switch ($action) {
+        case 'getAllUsers':
+            echo json_encode(['success' => true, 'data' => $userController->getAllUsers()]);
+            break;
+        case 'getUserById':
+            $userId = isset($_POST['userId']) ? intval($_POST['userId']) : 0;
+            $user = $userController->getUserById($userId);
+            echo $user
+                ? json_encode(['success' => true, 'data' => $user])
+                : json_encode(['success' => false, 'message' => 'User not found']);
+            break;
+        case 'getAllRoles':
+            echo json_encode(['success' => true, 'data' => $userController->getAllRoles()]);
+            break;
+        case 'addRole':
+            $userController->addRole();
+            break;
+        case 'updateUser':
+            $userController->updateUser();
+            break;
+        case 'deleteUser':
+            $userController->deleteUser();
+            break;
+        case 'searchUsers':
+            $userController->searchUsers();
+            break;
+        default:
+            echo json_encode(['success' => false, 'message' => 'Invalid action']);
+            break;
+    }
+    exit;
+}
+
+// Page load — fetch data for initial table render
+if (!isset($_SESSION['username'])) {
+    header('Location: ../Views/login.php');
+    exit();
+}
+
+$users = $userController->getAllUsers();
+$roles = $userController->getAllRoles();
 ?>
 
 <!DOCTYPE html>
@@ -30,13 +78,14 @@ $roles = $allRoles['data'] ?? [];
 
             <div class="row mb-5 align-items-center">
                 <div class="col">
-                    <h4 class="fw-bold mb-1">Update and Grand permissions</h4>
+                    <h4 class="fw-bold mb-1">Update and Grant permissions</h4>
                     <p class="text-muted small mb-0">Control system access levels.</p>
                 </div>
                 <div class="col-md-3 mt-3 mt-md-0">
                     <div class="input-group input-group-sm">
-                        <span class="input-group-text bg-white border-end-0 text-muted shadow-none"><i
-                                class="bi bi-search"></i></span>
+                        <span class="input-group-text bg-white border-end-0 text-muted shadow-none">
+                            <i class="bi bi-search"></i>
+                        </span>
                         <input type="text" id="searchInput" class="form-control border-start-0 ps-0 shadow-none"
                             placeholder="Search records...">
                     </div>
@@ -87,7 +136,8 @@ $roles = $allRoles['data'] ?? [];
                                                     onclick="loadUserData(<?php echo $user['id']; ?>)">
                                                     <i class="bi bi-pencil-square"></i>
                                                 </button>
-                                                <button class="btn btn-sm btn-white border-0 text-warning px-3" title="Delete" onclick="deleteUser(<?php echo $user['id']; ?>)">
+                                                <button class="btn btn-sm btn-white border-0 text-danger px-3" title="Delete"
+                                                    onclick="deleteUser(<?php echo $user['id']; ?>)">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
                                             </div>
@@ -105,6 +155,7 @@ $roles = $allRoles['data'] ?? [];
             </div>
         </div>
 
+        <!-- Update User Modal -->
         <div class="modal fade" id="updateModal" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content border-0 shadow-lg rounded-4 text-center">
@@ -136,13 +187,12 @@ $roles = $allRoles['data'] ?? [];
                             <div class="mb-3 text-start">
                                 <label class="form-label small fw-bold text-muted text-uppercase">Role</label>
                                 <select id="updateUserRole" class="form-select bg-light border-0 p-3 rounded-3" required>
-
                                     <?php foreach ($roles as $role): ?>
                                         <option value="<?php echo $role['roleid']; ?>"><?php echo htmlspecialchars($role['role']); ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-                            <button type="submit" id="saveprofile" class="btn btn-dark w-100 p-3 fw-bold rounded-3 mb-2">Save Profile Changes</button>
+                            <button type="submit" class="btn btn-dark w-100 p-3 fw-bold rounded-3 mb-2">Save Profile Changes</button>
                             <button type="button" class="btn btn-light w-100 p-3 fw-bold rounded-3 text-muted" data-bs-dismiss="modal">Cancel</button>
                         </form>
                     </div>
@@ -152,15 +202,13 @@ $roles = $allRoles['data'] ?? [];
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <script>
-            // Suspend user
+            // Delete user
             function deleteUser(userId) {
                 if (!confirm('Are you sure you want to delete this user?')) return;
 
                 fetch('', {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        },
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                         body: 'action=deleteUser&userId=' + userId
                     })
                     .then(response => response.json())
@@ -171,65 +219,48 @@ $roles = $allRoles['data'] ?? [];
                     .catch(error => console.error('Error:', error));
             }
 
-            // Load user data for editing
+            // Load user data into edit modal
             function loadUserData(userId) {
                 fetch('', {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        },
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                         body: 'action=getUserById&userId=' + userId
                     })
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
                             const user = data.data;
-
-                            // Populate all fields
                             document.getElementById('updateUserId').value = user.id;
                             document.getElementById('updateUserName').value = user.name;
                             document.getElementById('updateUserUsername').value = user.username;
                             document.getElementById('updateUserEmail').value = user.email;
-                            document.getElementById('updateUserPassword').value = ''; // always blank for security
+                            document.getElementById('updateUserPassword').value = '';
                             document.getElementById('editUserID').textContent = '#LIB-' + String(user.id).padStart(3, '0');
 
-                            // Pre-select the correct role
                             const roleSelect = document.getElementById('updateUserRole');
                             roleSelect.value = user.roleid;
-                            // If no option matched, fallback to first selectable option
-                            if (!roleSelect.value) {
-                                roleSelect.selectedIndex = 0;
-                            }
+                            if (!roleSelect.value) roleSelect.selectedIndex = 0;
 
-                            // Open modal only after all fields are populated
-                            const modal = new bootstrap.Modal(document.getElementById('updateModal'));
-                            modal.show();
+                            new bootstrap.Modal(document.getElementById('updateModal')).show();
                         } else {
                             alert('Failed to load user data. Please try again.');
                         }
                     })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('An error occurred while loading user data.');
-                    });
+                    .catch(error => console.error('Error:', error));
             }
-
-
 
             // Add role form
             document.getElementById('addRoleForm').addEventListener('submit', function(e) {
                 e.preventDefault();
 
-                const nic = document.getElementById('addRoleNic').value;
-                const email = document.getElementById('addRoleEmail').value;
+                const nic    = document.getElementById('addRoleNic').value;
+                const email  = document.getElementById('addRoleEmail').value;
                 const roleId = document.getElementById('addRoleSelect').value;
 
                 fetch('', {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        },
-                        body: 'action=addRole&nic=' + nic + '&email=' + encodeURIComponent(email) + '&roleId=' + roleId
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: 'action=addRole&nic=' + encodeURIComponent(nic) + '&email=' + encodeURIComponent(email) + '&roleId=' + roleId
                     })
                     .then(response => response.json())
                     .then(data => {
@@ -248,18 +279,16 @@ $roles = $allRoles['data'] ?? [];
                 e.preventDefault();
 
                 const body = 'action=updateUser' +
-                    '&userId=' + document.getElementById('updateUserId').value +
-                    '&name=' + encodeURIComponent(document.getElementById('updateUserName').value) +
+                    '&userId='   + document.getElementById('updateUserId').value +
+                    '&name='     + encodeURIComponent(document.getElementById('updateUserName').value) +
                     '&username=' + encodeURIComponent(document.getElementById('updateUserUsername').value) +
-                    '&email=' + encodeURIComponent(document.getElementById('updateUserEmail').value) +
+                    '&email='    + encodeURIComponent(document.getElementById('updateUserEmail').value) +
                     '&password=' + encodeURIComponent(document.getElementById('updateUserPassword').value) +
-                    '&roleId=' + document.getElementById('updateUserRole').value;
+                    '&roleId='   + document.getElementById('updateUserRole').value;
 
                 fetch('', {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        },
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                         body: body
                     })
                     .then(response => response.json())
@@ -274,7 +303,7 @@ $roles = $allRoles['data'] ?? [];
             });
 
             // Search users
-            document.getElementById('searchInput').addEventListener('keyup', function(e) {
+            document.getElementById('searchInput').addEventListener('keyup', function() {
                 const searchTerm = this.value;
 
                 if (searchTerm.length === 0) {
@@ -284,27 +313,23 @@ $roles = $allRoles['data'] ?? [];
 
                 fetch('', {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        },
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                         body: 'action=searchUsers&search=' + encodeURIComponent(searchTerm)
                     })
                     .then(response => response.json())
                     .then(data => {
-                        if (data.success) {
-                            updateUserTable(data.data);
-                        }
+                        if (data.success) updateUserTable(data.data);
                     })
                     .catch(error => console.error('Error:', error));
             });
 
-            // Update table dynamically
+            // Rebuild table from search results
             function updateUserTable(users) {
                 const tbody = document.getElementById('usersTableBody');
                 tbody.innerHTML = '';
 
                 if (users.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="5" class="text-center py-4 text-muted">No users found</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="7" class="text-center py-4 text-muted">No users found</td></tr>';
                     return;
                 }
 
@@ -312,79 +337,35 @@ $roles = $allRoles['data'] ?? [];
                     const row = document.createElement('tr');
                     row.setAttribute('data-user-id', user.id);
                     row.innerHTML = `
-                    <td class="ps-4 py-3">
-                        <div class="text-muted small font-monospace">#${String(user.id).padStart(5, '0')}</div>
-                    </td>
-                    <td class="py-3">
-                        <div class="fw-bold text-dark small">${user.name}</div>
-                    </td>
-                    <td class="py-3">
-                        <div class="small text-muted font-monospace">${user.username}</div>
-                    </td>
-                    <td class="py-3">
-                        <div class="small">${user.nic}</div>
-                    </td>
-                    <td class="py-3">
-                        <div class="small">${user.email}</div>
-                    </td>
-                    <td class="py-3 text-center">
-                        <span class="badge bg-white text-dark border px-3 py-2 fw-semibold rounded-3 small">
-                            ${user.role || 'No Role'}
-                        </span>
-                    </td>
-                    <td class="pe-4 py-3 text-end">
-                        <div class="btn-group border rounded-3 p-1 bg-white shadow-sm">
-                            <button class="btn btn-sm btn-white border-0 text-secondary px-3" onclick="loadUserData(${user.id})" title="Edit">
-                                <i class="bi bi-pencil-square"></i>
-                            </button>
-                            <button class="btn btn-sm btn-white border-0 text-warning px-3" onclick="suspendUser(${user.id})" title="Suspend">
-                                <i class="bi bi-slash-circle"></i>
-                            </button>
-                        </div>
-                    </td>
-                `;
+                        <td class="ps-4 py-3">
+                            <div class="text-muted small font-monospace">#${String(user.id).padStart(5, '0')}</div>
+                        </td>
+                        <td class="py-3"><div class="fw-bold text-dark small">${user.name}</div></td>
+                        <td class="py-3"><div class="small text-muted font-monospace">${user.username}</div></td>
+                        <td class="py-3"><div class="small">${user.nic}</div></td>
+                        <td class="py-3"><div class="small">${user.email}</div></td>
+                        <td class="py-3 text-center">
+                            <span class="badge bg-white text-dark border px-3 py-2 fw-semibold rounded-3 small">
+                                ${user.role || 'No Role'}
+                            </span>
+                        </td>
+                        <td class="pe-4 py-3 text-end">
+                            <div class="btn-group border rounded-3 p-1 bg-white shadow-sm">
+                                <button class="btn btn-sm btn-white border-0 text-secondary px-3" onclick="loadUserData(${user.id})" title="Edit">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
+                                <button class="btn btn-sm btn-white border-0 text-danger px-3" onclick="deleteUser(${user.id})" title="Delete">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    `;
                     tbody.appendChild(row);
                 });
             }
         </script>
+
+    </main>
+
 </body>
-
 </html>
-
-<?php
-if (isset($_POST['action'])) {
-    header('Content-Type: application/json');
-    $action = $_POST['action'];
-
-    switch ($action) {
-        case 'getAllUsers':
-            echo json_encode($userController->getAllUsers());
-            break;
-        case 'getUserById':
-            $userId = isset($_POST['userId']) ? intval($_POST['userId']) : 0;
-            echo json_encode($userController->getUserById($userId));
-            break;
-        case 'getAllRoles':
-            echo json_encode($userController->getAllRoles());
-            break;
-        case 'addRole':
-            echo json_encode($userController->addRole());
-            break;
-        case 'updateUser':
-            echo json_encode($userController->updateUser());
-            break;
-        case 'suspendUser':
-            echo json_encode($userController->deleteUser());
-            break;
-        case 'searchUsers':
-            echo json_encode($userController->searchUsers());
-            break;
-        default:
-            echo json_encode(['success' => false, 'message' => 'Invalid action']);
-            break;
-    }
-    exit;
-}
-?>
-
-</main>
