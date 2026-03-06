@@ -1,5 +1,5 @@
 <?php
-include 'src/Controllers/BookController.php';
+include '../Controllers/BookController.php';
 ?>
 
 <!DOCTYPE html>
