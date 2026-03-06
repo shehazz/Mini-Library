@@ -1,7 +1,7 @@
 <?php
 require_once '../Models/RollPromotionModel.php';
 
-$userController = new RolePromotionController();
+$userController = new RollPromotionController();
 
 // Router — handles all AJAX POST requests from the page
 if (isset($_POST['action'])) {

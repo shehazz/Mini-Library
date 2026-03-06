@@ -6,7 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require_once '../Models/RollPromotionModel.php';
 
-class RolePromotionController
+class RollPromotionController
 {
     private $rolePromotionModel;
 
