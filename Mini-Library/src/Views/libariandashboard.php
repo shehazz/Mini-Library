@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Librarian Dashboard</title>
+    <link rel="stylesheet" href="../../public/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../public/assets/css/dashboradstyle.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body>
+
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/Mini-Library/src/Includes/navsidebar.php'; ?>
+
+    <main class="main-content" style="margin-left: var(--sidebar-width); transition: margin 0.3s ease;">
+        <div class="container-fluid p-4">
+
+            
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h3 class="fw-bold mb-0" style="color: var(--main-dark);">Welcome, Librarian</h3>
+                    <small class="text-muted">
+                        <?= date('M d, Y | l') ?>
+                    </small>
+                </div>
+            </div>
+
+            
+            <div class="row g-3 mb-4">
+                <?php
+                $stats = [
+                    ['icon' => 'bi-book',               'label' => 'Total Books', 'value' => '12,450', 'bg' => '#F8FAF9', 'color' => 'text-dark',   'danger' => false],
+                    ['icon' => 'bi-journal-check',      'label' => 'Borrowed',    'value' => '680',    'bg' => '#F8FAF9', 'color' => 'text-dark',   'danger' => false],
+                    ['icon' => 'bi-exclamation-triangle','label' => 'Overdue',    'value' => '24',     'bg' => '#FEE2E2', 'color' => 'text-danger', 'danger' => true],
+                    ['icon' => 'bi-people',             'label' => 'Members',     'value' => '15,000', 'bg' => '#F8FAF9', 'color' => 'text-dark',   'danger' => false],
+                ];
+                foreach ($stats as $i => $stat): ?>
+                    <div class="col-md-3 col-sm-6">
+                        <div class="card stat-card p-3 shadow-sm delay-<?= $i + 1 ?> h-100">
+                            <div class="d-flex align-items-center">
+                                <div class="p-3 rounded-3 me-3 flex-shrink-0" style="background-color: <?= $stat['bg'] ?>;">
+                                    <i class="bi <?= $stat['icon'] ?> <?= $stat['color'] ?>" style="font-size: 1.5rem;"></i>
+                                </div>
+                                <div>
+                                    <p class="text-muted small mb-0"><?= $stat['label'] ?></p>
+                                    <h4 class="fw-bold mb-0 <?= $stat['danger'] ? 'text-danger' : '' ?>"
+                                        style="<?= !$stat['danger'] ? 'color: var(--main-dark);' : '' ?>">
+                                        <?= $stat['value'] ?>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            
+            <div class="card border-0 shadow-sm p-4" style="border-radius: 12px; background-color: #fff;">
+                <h5 class="fw-bold mb-3" style="color: var(--main-dark);">Quick Actions</h5>
+
+                <ul class="nav nav-tabs border-0 mb-2" id="quickActionTabs" role="tablist"
+                    style="border-bottom: 1px solid #E2E8F0 !important;">
+                    <?php
+                    $tabs = [
+                        ['id' => 'overview',    'label' => 'Overview'],
+                        ['id' => 'add-book',    'label' => 'Add New Book'],
+                        ['id' => 'register',    'label' => 'Register Member'],
+                        ['id' => 'issuebook',   'label' => 'Reserve Book'],
+                        ['id' => 'returnbook',  'label' => 'Return Book'],
+                    ];
+                    foreach ($tabs as $i => $tab): ?>
+                        <li class="nav-item" role="presentation">
+                            <button
+                                class="nav-link custom-tab <?= $i === 0 ? 'active' : '' ?>"
+                                id="tab-<?= $tab['id'] ?>"
+                                data-bs-toggle="tab"
+                                data-bs-target="#<?= $tab['id'] ?>"
+                                type="button"
+                                role="tab"
+                                aria-controls="<?= $tab['id'] ?>"
+                                aria-selected="<?= $i === 0 ? 'true' : 'false' ?>">
+                                <?= $tab['label'] ?>
+                            </button>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+
+                <div class="tab-content pt-3" id="quickActionContent">
+                    <div class="tab-pane fade show active" id="overview"   role="tabpanel" aria-labelledby="tab-overview">
+                        <?php include $_SERVER['DOCUMENT_ROOT'] . '/Mini-Library/src/Views/overduetable.php'; ?>
+                    </div>
+                    <div class="tab-pane fade" id="add-book"   role="tabpanel" aria-labelledby="tab-add-book">
+                        <?php include $_SERVER['DOCUMENT_ROOT'] . '/Mini-Library/src/Views/Insertbook.php'; ?>
+                    </div>
+                    <div class="tab-pane fade" id="register"   role="tabpanel" aria-labelledby="tab-register">
+                        <?php include $_SERVER['DOCUMENT_ROOT'] . '/Mini-Library/src/Views/registerstudent.php'; ?>
+                    </div>
+                    <div class="tab-pane fade" id="issuebook"  role="tabpanel" aria-labelledby="tab-issuebook">
+                        <?php include $_SERVER['DOCUMENT_ROOT'] . '/Mini-Library/src/Views/reservebook.php'; ?>
+                    </div>
+                    <div class="tab-pane fade" id="returnbook" role="tabpanel" aria-labelledby="tab-returnbook">
+                        <?php include $_SERVER['DOCUMENT_ROOT'] . '/Mini-Library/src/Views/returnbook.php'; ?>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
