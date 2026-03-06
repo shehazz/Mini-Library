@@ -14,7 +14,11 @@
 
 =======
 </head>
+<<<<<<< HEAD
 >>>>>>> 7f1600e (Refactor controllers/views; update dashboard UI)
+=======
+
+>>>>>>> 66c717b (correction)
 <body>
 
 <<<<<<< HEAD
@@ -87,7 +91,7 @@
     <main class="main-content" style="margin-left: var(--sidebar-width); transition: margin 0.3s ease;">
         <div class="container-fluid p-4">
 
-            
+
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
                     <h3 class="fw-bold mb-0" style="color: var(--main-dark);">Welcome, Librarian</h3>
@@ -97,14 +101,14 @@
                 </div>
             </div>
 
-            
+
             <div class="row g-3 mb-4">
                 <?php
                 $stats = [
-                    ['icon' => 'bi-book',               'label' => 'Total Books', 'value' => '12,450', 'bg' => '#F8FAF9', 'color' => 'text-dark',   'danger' => false],
-                    ['icon' => 'bi-journal-check',      'label' => 'Borrowed',    'value' => '680',    'bg' => '#F8FAF9', 'color' => 'text-dark',   'danger' => false],
-                    ['icon' => 'bi-exclamation-triangle','label' => 'Overdue',    'value' => '24',     'bg' => '#FEE2E2', 'color' => 'text-danger', 'danger' => true],
-                    ['icon' => 'bi-people',             'label' => 'Members',     'value' => '15,000', 'bg' => '#F8FAF9', 'color' => 'text-dark',   'danger' => false],
+                    ['icon' => 'bi-book', 'label' => 'Total Books', 'value' => '12,450', 'bg' => '#F8FAF9', 'color' => 'text-dark', 'danger' => false],
+                    ['icon' => 'bi-journal-check', 'label' => 'Borrowed', 'value' => '680', 'bg' => '#F8FAF9', 'color' => 'text-dark', 'danger' => false],
+                    ['icon' => 'bi-exclamation-triangle', 'label' => 'Overdue', 'value' => '24', 'bg' => '#FEE2E2', 'color' => 'text-danger', 'danger' => true],
+                    ['icon' => 'bi-people', 'label' => 'Members', 'value' => '15,000', 'bg' => '#F8FAF9', 'color' => 'text-dark', 'danger' => false],
                 ];
                 foreach ($stats as $i => $stat): ?>
                     <div class="col-md-3 col-sm-6">
@@ -127,6 +131,7 @@
 <<<<<<< HEAD
                 </div>
 
+<<<<<<< HEAD
                 <div class="card border-0 shadow-sm p-4" style="border-radius: 12px; background-color: #fff;">
                     <h5 class="fw-bold mb-3" style="color: var(--main-dark);">Quick Actions</h5>
                     <ul class="nav nav-tabs border-0 mb-2" id="quickActionTabs" role="tablist" style="border-bottom: 1px solid #E2E8F0 !important;">
@@ -156,6 +161,9 @@
 </body>
 =======
             
+=======
+
+>>>>>>> 66c717b (correction)
             <div class="card border-0 shadow-sm p-4" style="border-radius: 12px; background-color: #fff;">
                 <h5 class="fw-bold mb-3" style="color: var(--main-dark);">Quick Actions</h5>
 
@@ -163,23 +171,17 @@
                     style="border-bottom: 1px solid #E2E8F0 !important;">
                     <?php
                     $tabs = [
-                        ['id' => 'overview',    'label' => 'Overview'],
-                        ['id' => 'add-book',    'label' => 'Add New Book'],
-                        ['id' => 'register',    'label' => 'Register Member'],
-                        ['id' => 'issuebook',   'label' => 'Reserve Book'],
-                        ['id' => 'returnbook',  'label' => 'Return Book'],
+                        ['id' => 'overview', 'label' => 'Overview'],
+                        ['id' => 'add-book', 'label' => 'Add New Book'],
+                        ['id' => 'register', 'label' => 'Register Member'],
+                        ['id' => 'issuebook', 'label' => 'Reserve Book'],
+                        ['id' => 'returnbook', 'label' => 'Return Book'],
                     ];
                     foreach ($tabs as $i => $tab): ?>
                         <li class="nav-item" role="presentation">
-                            <button
-                                class="nav-link custom-tab <?= $i === 0 ? 'active' : '' ?>"
-                                id="tab-<?= $tab['id'] ?>"
-                                data-bs-toggle="tab"
-                                data-bs-target="#<?= $tab['id'] ?>"
-                                type="button"
-                                role="tab"
-                                aria-controls="<?= $tab['id'] ?>"
-                                aria-selected="<?= $i === 0 ? 'true' : 'false' ?>">
+                            <button class="nav-link custom-tab <?= $i === 0 ? 'active' : '' ?>" id="tab-<?= $tab['id'] ?>"
+                                data-bs-toggle="tab" data-bs-target="#<?= $tab['id'] ?>" type="button" role="tab"
+                                aria-controls="<?= $tab['id'] ?>" aria-selected="<?= $i === 0 ? 'true' : 'false' ?>">
                                 <?= $tab['label'] ?>
                             </button>
                         </li>
@@ -187,16 +189,16 @@
                 </ul>
 
                 <div class="tab-content pt-3" id="quickActionContent">
-                    <div class="tab-pane fade show active" id="overview"   role="tabpanel" aria-labelledby="tab-overview">
+                    <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="tab-overview">
                         <?php include $_SERVER['DOCUMENT_ROOT'] . '/Mini-Library/src/Views/overduetable.php'; ?>
                     </div>
-                    <div class="tab-pane fade" id="add-book"   role="tabpanel" aria-labelledby="tab-add-book">
+                    <div class="tab-pane fade" id="add-book" role="tabpanel" aria-labelledby="tab-add-book">
                         <?php include $_SERVER['DOCUMENT_ROOT'] . '/Mini-Library/src/Views/Insertbook.php'; ?>
                     </div>
-                    <div class="tab-pane fade" id="register"   role="tabpanel" aria-labelledby="tab-register">
+                    <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="tab-register">
                         <?php include $_SERVER['DOCUMENT_ROOT'] . '/Mini-Library/src/Views/registerstudent.php'; ?>
                     </div>
-                    <div class="tab-pane fade" id="issuebook"  role="tabpanel" aria-labelledby="tab-issuebook">
+                    <div class="tab-pane fade" id="issuebook" role="tabpanel" aria-labelledby="tab-issuebook">
                         <?php include $_SERVER['DOCUMENT_ROOT'] . '/Mini-Library/src/Views/reservebook.php'; ?>
                     </div>
                     <div class="tab-pane fade" id="returnbook" role="tabpanel" aria-labelledby="tab-returnbook">
@@ -210,5 +212,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+<<<<<<< HEAD
 </html>
 >>>>>>> 7f1600e (Refactor controllers/views; update dashboard UI)
+=======
+
+</html>
+>>>>>>> 66c717b (correction)
