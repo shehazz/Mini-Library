@@ -1,5 +1,5 @@
 <?php
-require_once '../../src/Controllers/UserController.php';
+require_once '../Controllers/RollPromotionController.php';
 
 $userController = new RolePromotionController();
 $allUsers = $userController->getAllUsers();

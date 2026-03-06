@@ -69,11 +69,11 @@ class RollPromotionModel extends DBConnection
 
     public function createUser($username, $password, $name, $nic, $email, $roleId)
     {
-        // FIX: was "sssisi" — $name is a string, not int. Corrected to "ssssii"
+        
         $query = "INSERT INTO user (username, password, name, nic, email, roleid) VALUES (?, ?, ?, ?, ?, ?)";
 
         if ($stmt = $this->conn->prepare($query)) {
-            $stmt->bind_param("ssssii", $username, $password, $name, $nic, $email, $roleId);
+            $stmt->bind_param("sssssi", $username, $password, $name, $nic, $email, $roleId);
             $result = $stmt->execute();
             $stmt->close();
             return $result;
@@ -97,12 +97,11 @@ class RollPromotionModel extends DBConnection
 
     public function updateUser($userId, $name, $username, $email, $password, $roleId)
     {
+        
         if (!empty($password)) {
-            
-            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
             $query = "UPDATE user SET name = ?, username = ?, email = ?, password = ?, roleid = ? WHERE id = ?";
             if ($stmt = $this->conn->prepare($query)) {
-                $stmt->bind_param("ssssii", $name, $username, $email, $hashedPassword, $roleId, $userId);
+                $stmt->bind_param("ssssii", $name, $username, $email, $password, $roleId, $userId);
                 $result = $stmt->execute();
                 $stmt->close();
                 return $result;
