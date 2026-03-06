@@ -1,7 +1,11 @@
 <?php
-require_once '../Models/RollPromotionModel.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-$userController = new RollPromotionController();
+require_once '../Controllers/RollPromotionController.php';
+
+$RollPromotionController = new RollPromotionController();
 
 // Router — handles all AJAX POST requests from the page
 if (isset($_POST['action'])) {
@@ -16,29 +20,29 @@ if (isset($_POST['action'])) {
 
     switch ($action) {
         case 'getAllUsers':
-            echo json_encode(['success' => true, 'data' => $userController->getAllUsers()]);
+            echo json_encode(['success' => true, 'data' => $RollPromotionController->getAllUsers()]);
             break;
         case 'getUserById':
             $userId = isset($_POST['userId']) ? intval($_POST['userId']) : 0;
-            $user = $userController->getUserById($userId);
+            $user = $RollPromotionController->getUserById($userId);
             echo $user
                 ? json_encode(['success' => true, 'data' => $user])
                 : json_encode(['success' => false, 'message' => 'User not found']);
             break;
         case 'getAllRoles':
-            echo json_encode(['success' => true, 'data' => $userController->getAllRoles()]);
+            echo json_encode(['success' => true, 'data' => $RollPromotionController->getAllRoles()]);
             break;
         case 'addRole':
-            echo json_encode($userController->addRole());
+            echo json_encode($RollPromotionController->addRole());
             break;
         case 'updateUser':
-            echo json_encode($userController->updateUser());
+            echo json_encode($RollPromotionController->updateUser());
             break;
         case 'deleteUser':
-            echo json_encode($userController->deleteUser());
+            echo json_encode($RollPromotionController->deleteUser());
             break;
         case 'searchUsers':
-            echo json_encode($userController->searchUsers());
+            echo json_encode($RollPromotionController->searchUsers());
             break;
         default:
             echo json_encode(['success' => false, 'message' => 'Invalid action']);
@@ -53,8 +57,8 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-$users = $userController->getAllUsers();
-$roles = $userController->getAllRoles();
+$users = $RollPromotionController->getAllUsers();
+$roles = $RollPromotionController->getAllRoles();
 ?>
 
 <!DOCTYPE html>
@@ -80,9 +84,6 @@ $roles = $userController->getAllRoles();
                 <div class="col">
                     <h4 class="fw-bold mb-1">Update and Grant permissions</h4>
                     <p class="text-muted small mb-0">Control system access levels.</p>
-                    <button class="btn btn-dark btn-sm mt-2 rounded-3" data-bs-toggle="modal" data-bs-target="#addModal">
-                        <i class="bi bi-person-plus me-1"></i> Assign Role
-                    </button>
                 </div>
                 <div class="col-md-3 mt-3 mt-md-0">
                     <div class="input-group input-group-sm">
@@ -154,43 +155,6 @@ $roles = $userController->getAllRoles();
                             <?php endif; ?>
                         </tbody>
                     </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- Add Role Modal -->
-        <div class="modal fade" id="addModal" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content border-0 shadow-lg rounded-4 text-center">
-                    <div class="modal-body p-5">
-                        <div class="bg-success-subtle text-success rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
-                            style="width: 60px; height: 60px;">
-                            <i class="bi bi-person-check fs-3"></i>
-                        </div>
-                        <h5 class="fw-bold">Assign Role</h5>
-                        <p class="text-muted small mb-4">Find a user by NIC and Email, then assign a role.</p>
-                        <form id="addRoleForm">
-                            <div class="mb-3 text-start">
-                                <label class="form-label small fw-bold text-muted text-uppercase">NIC</label>
-                                <input type="text" id="addRoleNic" class="form-control bg-light border-0 p-3 rounded-3" required>
-                            </div>
-                            <div class="mb-3 text-start">
-                                <label class="form-label small fw-bold text-muted text-uppercase">Email</label>
-                                <input type="email" id="addRoleEmail" class="form-control bg-light border-0 p-3 rounded-3" required>
-                            </div>
-                            <div class="mb-3 text-start">
-                                <label class="form-label small fw-bold text-muted text-uppercase">Role</label>
-                                <select id="addRoleSelect" class="form-select bg-light border-0 p-3 rounded-3" required>
-                                    <option value="" disabled selected>Select a role</option>
-                                    <?php foreach ($roles as $role): ?>
-                                        <option value="<?php echo $role['roleid']; ?>"><?php echo htmlspecialchars($role['role']); ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-dark w-100 p-3 fw-bold rounded-3 mb-2">Assign Role</button>
-                            <button type="button" class="btn btn-light w-100 p-3 fw-bold rounded-3 text-muted" data-bs-dismiss="modal">Cancel</button>
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>
@@ -295,31 +259,6 @@ $roles = $userController->getAllRoles();
                     })
                     .catch(error => console.error('Error:', error));
             }
-
-            // Add role form
-            document.getElementById('addRoleForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                const nic    = document.getElementById('addRoleNic').value;
-                const email  = document.getElementById('addRoleEmail').value;
-                const roleId = document.getElementById('addRoleSelect').value;
-
-                fetch('', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                        body: 'action=addRole&nic=' + encodeURIComponent(nic) + '&email=' + encodeURIComponent(email) + '&roleId=' + roleId
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        alert(data.message);
-                        if (data.success) {
-                            this.reset();
-                            bootstrap.Modal.getInstance(document.getElementById('addModal')).hide();
-                            location.reload();
-                        }
-                    })
-                    .catch(error => console.error('Error:', error));
-            });
 
             // Update user form
             document.getElementById('updateUserForm').addEventListener('submit', function(e) {
