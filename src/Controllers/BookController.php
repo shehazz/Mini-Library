@@ -17,7 +17,7 @@ class BookController
     public function saveBook()
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['save_book'])) {
-            return; // nothing to do
+            return; 
         }
 
         $bookname = trim($_POST['bookname'] ?? '');

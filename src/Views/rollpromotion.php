@@ -1,5 +1,5 @@
 <?php
-require_once '../Models/RollPromotionModel.php';
+require_once '../Controllers/RollPromotionController.php';
 
 $userController = new RollPromotionController();
 
