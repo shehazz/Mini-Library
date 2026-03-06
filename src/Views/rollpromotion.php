@@ -1,8 +1,12 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+=======
+require_once '../Controllers/RollPromotionController.php';
+>>>>>>> 7f1600e (Refactor controllers/views; update dashboard UI)
 =======
 require_once '../Controllers/RollPromotionController.php';
 >>>>>>> 7f1600e (Refactor controllers/views; update dashboard UI)
