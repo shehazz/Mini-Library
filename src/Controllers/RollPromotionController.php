@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// AUTH GUARD: All user management requires a logged-in session
+
 if (!isset($_SESSION['username'])) {
     header('Content-Type: application/json');
     echo json_encode(['success' => false, 'message' => 'Unauthorized']);
@@ -12,7 +12,7 @@ if (!isset($_SESSION['username'])) {
 }
 
 require_once '../../Config/DBConnection.php';
-require_once '../Models/UserModel.php';
+require_once '../Models/RollPromotionModel.php';
 
 class RolePromotionController
 {
@@ -31,6 +31,9 @@ class RolePromotionController
 
     public function getUserById($userId)
     {
+        if ($userId <= 0) {
+            return ['success' => false, 'message' => 'Invalid User ID'];
+        }
         $user = $this->rolePromotionModel->getUserById($userId);
         if ($user === false) {
             return ['success' => false, 'message' => 'User not found'];
@@ -48,17 +51,18 @@ class RolePromotionController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = isset($_POST['username']) ? trim($_POST['username']) : '';
-            $password = isset($_POST['password']) ? trim($_POST['password']) : '';
+            
+            $password = isset($_POST['password']) ? $_POST['password'] : '';
             $name     = isset($_POST['name'])     ? trim($_POST['name'])     : '';
             $nic      = isset($_POST['nic'])       ? trim($_POST['nic'])      : '';
             $email    = isset($_POST['email'])     ? trim($_POST['email'])    : '';
             $roleId   = isset($_POST['roleId'])    ? intval($_POST['roleId']) : 0;
 
-            if (empty($username) || empty($password) || empty($name) || empty($nic) || empty($email) || empty($roleId)) {
+            if (empty($username) || empty($password) || empty($name) || empty($nic) || empty($email) || $roleId <= 0) {
                 return ['success' => false, 'message' => 'All fields are required'];
             }
 
-            // Hash password before passing to model
+            
             $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
             $result = $this->rolePromotionModel->createUser($username, $hashedPassword, $name, $nic, $email, $roleId);
@@ -78,7 +82,7 @@ class RolePromotionController
             $email  = isset($_POST['email'])  ? trim($_POST['email'])    : '';
             $roleId = isset($_POST['roleId']) ? intval($_POST['roleId']) : 0;
 
-            if (empty($nic) || empty($email) || empty($roleId)) {
+            if (empty($nic) || empty($email) || $roleId <= 0) {
                 return ['success' => false, 'message' => 'NIC, Email, and Role are required'];
             }
 
@@ -86,6 +90,11 @@ class RolePromotionController
 
             if ($user === false) {
                 return ['success' => false, 'message' => 'User not found with provided NIC and Email'];
+            }
+
+            
+            if ((int)$user['roleid'] === $roleId) {
+                return ['success' => false, 'message' => htmlspecialchars($user['name']) . ' already has this role'];
             }
 
             $result = $this->rolePromotionModel->addRoleToUser($user['id'], $roleId);
@@ -105,14 +114,19 @@ class RolePromotionController
             $name     = isset($_POST['name'])     ? trim($_POST['name'])       : '';
             $username = isset($_POST['username']) ? trim($_POST['username'])   : '';
             $email    = isset($_POST['email'])    ? trim($_POST['email'])      : '';
-            $password = isset($_POST['password']) ? trim($_POST['password'])   : '';
+            
+            $password = isset($_POST['password']) ? $_POST['password']         : '';
             $roleId   = isset($_POST['roleId'])   ? intval($_POST['roleId'])   : 0;
 
-            if (empty($userId) || empty($name) || empty($username) || empty($email) || empty($roleId)) {
+            
+            if ($userId <= 0 || empty($name) || empty($username) || empty($email) || $roleId <= 0) {
                 return ['success' => false, 'message' => 'All fields are required'];
             }
 
-            $result = $this->rolePromotionModel->updateUser($userId, $name, $username, $email, $password, $roleId);
+            
+            $hashedPassword = !empty($password) ? password_hash($password, PASSWORD_BCRYPT) : '';
+
+            $result = $this->rolePromotionModel->updateUser($userId, $name, $username, $email, $hashedPassword, $roleId);
 
             if ($result === false) {
                 return ['success' => false, 'message' => 'Failed to update user'];
@@ -127,8 +141,15 @@ class RolePromotionController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $userId = isset($_POST['userId']) ? intval($_POST['userId']) : 0;
 
-            if (empty($userId)) {
+            
+            if ($userId <= 0) {
                 return ['success' => false, 'message' => 'User ID required'];
+            }
+
+            
+            $user = $this->rolePromotionModel->getUserById($userId);
+            if ($user === false) {
+                return ['success' => false, 'message' => 'User not found'];
             }
 
             if ($userId === 1) {
@@ -162,7 +183,7 @@ class RolePromotionController
     }
 }
 
-// Route POST actions
+
 if (isset($_POST['action'])) {
     $rolePromotionController = new RolePromotionController();
     $action = $_POST['action'];
@@ -172,7 +193,7 @@ if (isset($_POST['action'])) {
             $result = $rolePromotionController->getAllUsers();
             break;
         case 'getUserById':
-            $userId = isset($_POST['userId']) ? intval($_POST['userId']) : null;
+            $userId = isset($_POST['userId']) ? intval($_POST['userId']) : 0;
             $result = $rolePromotionController->getUserById($userId);
             break;
         case 'getAllRoles':

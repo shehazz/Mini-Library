@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD
 require_once '../Models/RollPromotionModel.php';
+=======
+require_once '../Controllers/RollPromotionController.php';
+>>>>>>> be8a3f7e07cb88fce97d87106a0474b3b07f9ab0
 
 $userController = new RolePromotionController();
 $allUsers = $userController->getAllUsers();
