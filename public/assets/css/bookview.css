@@ -4,18 +4,18 @@
     --main-light: #4E6A85;
     --bg: #F4F7F9;
     --card: #FFFFFF;
-    --sidebar-bg: #F8FAF9;
+    --sidebar-bg: #2C3E50;
+    /* Changed to match dark theme */
     --accent: #0891B2;
     --success: #6B8E61;
     --danger: #E74C3C;
-    --text-dark: #2C3E50;
-    --text-muted: #7F8C8D;
+    --text-light: #ecf0f1;
+    --text-muted: #95a5a6;
     --border: #DCE4EC;
-    --hover-success:#182b13;
 }
 
 .borrowbtn {
-    background-color: var(--success);
+    background-color: var(--main-light);
     width: 220px;
     height: auto;
     align-items: center;
@@ -26,11 +26,21 @@
 }
 
 .borrowbtn:hover {
-    background-color: var(--hover-success);
+    background-color: var(--main-dark);
     width: 220px;
     align-items: center;
     justify-content: center;
     border: none;
     font-weight: bold;
     color: var(--card);
+}
+
+.bname {
+    color: var(--main);
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.text {
+    color: var(--main);
 }
