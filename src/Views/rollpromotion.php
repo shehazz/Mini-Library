@@ -1,9 +1,5 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-require_once '../Controllers/RollPromotionController.php';
+require_once '../Models/RollPromotionModel.php';
 
 $userController = new RolePromotionController();
 
