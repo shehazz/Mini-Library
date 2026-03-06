@@ -2,7 +2,7 @@
 /**
  * manage interactions between models and views.
  */
-require_once '../Models/BookModel.php';
+require_once '../Models/InsertBookModel.php';
 
 class BookController
 {
@@ -46,14 +46,14 @@ class BookController
                 );
 
                 if ($result) {
-                    header("Location: /Mini-Library-1/src/Views/libariandashboard.php?status=success");
+                    header("Location: /Mini-Library/src/Views/libariandashboard.php?status=success");
                 } else {
-                    header("Location: /Mini-Library-1/src/Includes/addbook.php?status=error");
+                    header("Location: /Mini-Library/src/Includes/addbook.php?status=error");
                 }
                 exit;
 
             } else {
-                header("Location: /Mini-Library-1/src/Includes/addbook.php?status=empty");
+                header("Location: /Mini-Library/src/Includes/addbook.php?status=empty");
                 exit;
             }
         }
