@@ -5,7 +5,6 @@
     --bg: #F4F7F9;
     --card: #FFFFFF;
     --sidebar-bg: #2C3E50;
-    /* Changed to match dark theme */
     --accent: #0891B2;
     --success: #6B8E61;
     --danger: #E74C3C;
@@ -14,33 +13,48 @@
     --border: #DCE4EC;
 }
 
+.bname {
+    color: var(--main);
+    font-weight: bold;
+}
+
+
+.coverpage {
+    background: var(--main-light);
+    background-size: cover;
+    background-position: center;
+    height: 250px;
+    width: 100%;
+}
+
+
+.overlap-content {
+    margin-top: -80px;
+}
+
 .borrowbtn {
     background-color: var(--main-light);
-    width: 220px;
-    height: auto;
-    align-items: center;
-    justify-content: center;
     border: none;
     font-weight: bold;
-    color: var(--card);
+    color: white;
+    transition: 0.3s;
+    padding: 10px 25px;
+    width: 100%;
 }
 
 .borrowbtn:hover {
     background-color: var(--main-dark);
-    width: 220px;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    font-weight: bold;
-    color: var(--card);
+    color: white;
 }
 
-.bname {
+.text1 {
     color: var(--main);
-    font-weight: bold;
-    font-size: 40px;
 }
 
-.text {
-    color: var(--main);
+.text2 {
+    color: var(--main-light);
+}
+
+.vertical-line{
+    min-width: 80px;
 }
