@@ -16,53 +16,59 @@
 
     <?php include '../Includes/navsidebar.php' ?>
 
-    <main class="content mt-5" id="main-content">
+    <div class="content d-flex flex-column flex-grow-1" id="main-content">
 
-        <?php
+        <?php include '../Includes/navbar.php' ?>
 
-        require_once '../../Config/DBConnection.php';
+            <main class="flex-grow-1" style="overflow-y: auto;">
 
-        $db = new DBConnection();
-        $conn = $db->getConnection();
 
-        $query = "SELECT b.bookname, b.author, b.isbn, b.category, b.description, 
+
+            <?php
+
+            require_once '../../Config/DBConnection.php';
+
+            $db = new DBConnection();
+            $conn = $db->getConnection();
+
+            $query = "SELECT b.bookname, b.author, b.isbn, b.category, b.description, 
           (SELECT COUNT(*) FROM bookcopies bc 
            WHERE bc.isbn = b.isbn AND bc.availability = 'Available') as available_count
           FROM book b 
           LIMIT 12";
-        $result = $conn->query($query);
-        ?>
+            $result = $conn->query($query);
+            ?>
 
-        <div class="container mt-5">
-            <div class="row">
-                <?php while ($book = $result->fetch_assoc()): ?>
-                    <div class="col-lg-3 col-md-6 col-sm-12 g-4">
-                        <a href="bookview.php?isbn=<?php echo $book['isbn']; ?>" class="text-decoration-none">
-                            <div class="card h-100 shadow rounded-4" id="card">
-                                <div class="card-body">
-                                    <h5 class="card-title fw-bold"><?php echo $book['bookname']; ?></h5>
-                                    <h6 class="card-subtitle mb-2">by <?php echo $book['author']; ?></h6>
-                                    <p class="small">ISBN: <?php echo $book['isbn']; ?></p>
+            <div class="container mt-5">
+                <div class="row">
+                    <?php while ($book = $result->fetch_assoc()): ?>
+                        <div class="col-lg-3 col-md-6 col-sm-12 g-4">
+                            <a href="bookview.php?isbn=<?php echo $book['isbn']; ?>" class="text-decoration-none">
+                                <div class="card h-100 shadow rounded-4" id="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title fw-bold"><?php echo $book['bookname']; ?></h5>
+                                        <h6 class="card-subtitle mb-2">by <?php echo $book['author']; ?></h6>
+                                        <p class="small">ISBN: <?php echo $book['isbn']; ?></p>
 
 
-                                    <?php if ($book['available_count'] > 0): ?>
-                                        <button class="btn btn-sm btn-success">Borrow</button>
-                                    <?php else: ?>
-                                        <span class="badge bg-danger">Issued</span>
-                                    <?php endif; ?>
+                                        <?php if ($book['available_count'] > 0): ?>
+                                            <button class="btn btn-sm btn-success">Borrow</button>
+                                        <?php else: ?>
+                                            <span class="badge bg-danger">Issued</span>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                <?php endwhile; ?>
+                            </a>
+                        </div>
+                    <?php endwhile; ?>
 
+                </div>
             </div>
-        </div>
 
 
-    </main>
+        </main>
 
-
+    </div>
 
     <script src="../public/assets/js/navsidebar.js"></script>
     <script src="../public/assets/js/bootstrap.bundle.min.js"></script>
