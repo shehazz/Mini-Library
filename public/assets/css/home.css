@@ -26,7 +26,7 @@
 }
 
 #card:hover {
-    background: var(--main-dark);
+    background: var(--main-light);
     color: var(--card);
     transform: scale(1.1);
 }
