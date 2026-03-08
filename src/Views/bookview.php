@@ -27,7 +27,6 @@ include '../Controllers/bookviewcontroller.php';
                         <div class="d-flex gap-2">
                             <a href="../Views/reservebook.php"><button
                                     class="borrowbtn rounded-pill mx-1 py-2">Borrow</button></a>
-
                         </div>
                     </div>
                 </div>
@@ -60,7 +59,7 @@ include '../Controllers/bookviewcontroller.php';
         <div class="row row-cols-2 row-cols-md-4 g-4">
             <?php
             for ($i = 0; $i < 4; $i++):
-                ?>
+            ?>
                 <div class="col">
                     <div class="card h-100 border-0 shadow-sm rounded-4 text-center p-3 bg-white">
                         <img src="https://via.placeholder.com/150x200" class="card-img-top rounded-3" alt="Interest Cover">
