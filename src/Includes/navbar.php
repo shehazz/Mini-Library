@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    
+
     <nav class="navbar">
         <div class="nav-left col-lg-4 ms-3">
             <span class="brand fw-bold">LibManage<strong>Pro</strong></span>
