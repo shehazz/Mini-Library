@@ -1,4 +1,25 @@
+<?php
+// 1. Database Configuration
+$server = "localhost";
+$username = "root";
+$password = "";
+$database = "minilibrary";
+
+// 2. Create Connection
+$conn = mysqli_connect($server, $username, $password, $database);
+
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// 3. Execute Query
+$sql = "SELECT * FROM user,role WHERE user.roleid = role.roleid";
+$result = mysqli_query($conn, $sql);
+?>
+
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -17,21 +38,17 @@
     <main class="content" id="main-content">
 
         <div class="container-fluid">
-            <header class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom bg-white px-3 rounded shadow-sm">
+            <header class="d-flex justify-content-between align-items-center mb-4 pb-3  shadow-sm">
                 <div>
-                    <h2 class="h4 mb-0 text-primary fw-bold">
+                    <h2 class="h4 mb-0  fw-bold">
                         <i class="bi bi-speedometer2 me-2"></i>Admin Dashboard
                     </h2>
                     <small class="text-muted">MiniLibrary Management System</small>
                 </div>
-                <div class="text-end">
-                    <a href="rollpromotion.php" class="btn btn-outline-primary btn-sm fw-bold">
-                        <i class="bi bi-plus-lg me-1"></i> Add Role
-                    </a>
-                </div>
+                
             </header>
 
-            <div class="row g-4 mb-4">
+            <!-- <div class="row g-4 mb-4">
                 <div class="col-12 col-sm-6 col-xl-3">
                     <div class="card border-0 border-start border-primary border-4 shadow-sm h-100 bg-white">
                         <div class="card-body p-4">
@@ -95,6 +112,60 @@
                         </div>
                     </div>
                 </div>
+            </div> -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-3">
+                    <div class="card stat-card p-3 shadow-sm delay-1">
+                        <div class="d-flex align-items-center">
+                            <div class="p-3 rounded-3 me-3" style="background-color: #F8FAF9;">
+                                <i class="bi bi-people-fill fs-3 text-primary"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted small mb-0">Total Users</p>
+                                <h4 class="fw-bold mb-0" style="color: var(--main-dark);">16,450</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card stat-card p-3 shadow-sm delay-2">
+                        <div class="d-flex align-items-center">
+                            <div class="p-3 rounded-3 me-3" style="background-color: #F8FAF9;">
+                                <i class="bi bi-person-badge-fill fs-3 text-danger"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted small mb-0">Admins</p>
+                                <h4 class="fw-bold mb-0" style="color: var(--main-dark);">1</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card stat-card p-3 shadow-sm delay-3">
+                        <div class="d-flex align-items-center">
+                            <div class="p-3 rounded-3 me-3" style="background-color: #F8FAF9;">
+                                <i class="bi bi-journal-bookmark fs-3"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted small mb-0">Librarians</p>
+                                <h4 class="fw-bold mb-0" style="color: var(--main-dark);">1</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card stat-card p-3 shadow-sm delay-4">
+                        <div class="d-flex align-items-center">
+                            <div class="p-3 rounded-3 me-3" style="background-color: #F8FAF9;">
+                                <i class="bi bi-person-check fs-3 text-info"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted small mb-0">Members</p>
+                                <h4 class="fw-bold mb-0" style="color: var(--main-dark);">15,000</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="card border-0 shadow-sm overflow-hidden">
@@ -103,70 +174,57 @@
                         <div class="col">
                             <h5 class="mb-0 fw-bold">User Management</h5>
                         </div>
-                        <div class="col text-end">
-                            <div class="input-group input-group-sm w-auto d-inline-flex">
-                                <input type="text" class="form-control" placeholder="Search users...">
-                                <button class="btn btn-primary"><i class="bi bi-search"></i></button>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
-                <div class="card-body p-0">
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle mb-0">
-                            <thead class="table-light text-secondary">
-                                <tr>
-                                    <th class="ps-4">ID</th>
-                                    <th>Full Name</th>
-                                    <th>Username</th>
-                                    <th>Email Address</th>
-                                    <th>NIC Number</th>
-                                    <th class="text-center">Account Role</th>
-                                </tr>
-                            </thead>
-                            <tbody class="border-top-0">
-                                <tr>
-                                    <td class="ps-4 fw-bold text-muted">1</td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="bg-danger bg-opacity-10 text-danger rounded-circle d-flex align-items-center justify-content-center me-2 fw-bold" style="width: 35px; height: 35px; font-size: 0.8rem;">AK</div>
-                                            Amodh Kushan
-                                        </div>
-                                    </td>
-                                    <td>amodhkushan</td>
-                                    <td>amodhkushan@gmail.com</td>
-                                    <td><code class="text-dark">200507801424</code></td>
-                                    <td class="text-center">
-                                        <span class="badge rounded-pill border border-dark  px-3">Admin</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4 fw-bold text-muted">2</td>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="bg-success bg-opacity-10 text-success rounded-circle d-flex align-items-center justify-content-center me-2 fw-bold" style="width: 35px; height: 35px; font-size: 0.8rem;">JD</div>
-                                            Jayodya Dewmini
-                                        </div>
-                                    </td>
-                                    <td>dewminijdh</td>
-                                    <td>jayodyadewmini@gmail.com</td>
-                                    <td><code class="text-dark">200515014530</code></td>
-                                    <td class="text-center">
-                                        <span class="badge rounded-pill border border-dark  px-3">Librarian</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="bg-light-subtle border-bottom">
+                            <tr class="text-muted small text-uppercase">
+                                
+                                <th class="ps-4 py-3 border-0">Name</th>
+                                <th class="ps-4 py-3 border-0">Username</th>
+                                <th class="ps-4 py-3 border-0">NIC</th>
+                                <th class="ps-4 py-3 border-0">Email</th>
+                                <th class="ps-4 py-3 border-0">Role</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody class="border-top-0" id="usersTableBody">
+                            <?php
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo "<tr>";
+                                    
+                                    echo "<td class='ps-4 fw-bold'>" . htmlspecialchars($row["name"]) . "</td>";
+                                    echo "<td>" . htmlspecialchars($row["username"]) . "</td>";
+                                    echo "<td class='text-muted'>" . htmlspecialchars($row["nic"]) . "</td>";
+                                    echo "<td>
+                                            <a href='mailto:" . htmlspecialchars($row["email"]) . "' class='text-decoration-none'>
+                                                <i class='bi bi-envelope me-1'></i>" . htmlspecialchars($row["email"]) . "
+                                            </a>
+                                          </td>";
+                                    echo "<td class='pe-4'>
+                                            <span class='badge bg-light text-dark border'>" . htmlspecialchars($row["role"]) . "</span>
+                                          </td>";
+                                    echo "</tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='5' class='text-center py-5 text-muted'>
+                                        <i class='bi bi-folder-x display-1 d-block mb-3'></i>
+                                        No results found in the database.
+                                      </td></tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
+            </div>
                 <div class="card-footer bg-white border-top-0 py-3">
                     <nav class="d-flex justify-content-between align-items-center">
-                        <small class="text-muted">Showing 2 of 2 entries</small>
-                        <ul class="pagination pagination-sm mb-0">
-                            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
-                        </ul>
+                        
+                        
                     </nav>
                 </div>
             </div>
