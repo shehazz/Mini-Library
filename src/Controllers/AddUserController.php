@@ -51,7 +51,7 @@ class MemberController {
     }
 }
 
-if (isset($_POST['register_member'])) {
+if (isset($_POST['register_user'])) {
     $memberController = new MemberController();
     $memberController->formSubmit();
 }

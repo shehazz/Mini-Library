@@ -27,7 +27,7 @@
             </div>
 
             <div class="card-body p-4">
-                <form action="src/Controllers/AddUserController.php" method="POST" enctype="multipart/form-data">
+                <form action="../Controllers/AddUserController.php" method="POST" enctype="multipart/form-data">
                     <div class="row">
                 
                         <div class="col-md-6 mb-4">
@@ -84,7 +84,7 @@
                     <div class="mt-2">
                         <button type="submit" class="btn px-4 py-2 me-2 text-white shadow-sm" 
                                 style="background-color: #7a8e69; border-radius: 25px; border: none;">
-                            <i class="bi bi-person-plus-fill me-2"></i>Register Member
+                            <i class="bi bi-person-plus-fill me-2" name="register_user"></i>Register Member
                         </button>
                         <button type="reset" class="btn px-4 py-2 bg-white border shadow-sm" 
                                 style="border-radius: 25px; color: #6c757d; border-color: #E2E8F0 !important;">
