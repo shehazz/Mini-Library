@@ -28,7 +28,7 @@ class LoginController
 
                     echo '<script>console.log("Login Successful");</script>';
                     if ($_SESSION['roleid'] = 1):
-                        echo '<script>window.location.href = "../Views/rollpromotion.php";</script>';
+                        echo '<script>window.location.href = "../Views/Admindashboard.php";</script>';
                     endif;
                     if ($_SESSION['roleid'] = 2):
                         echo '<script>window.location.href = "../Views/libariandashboard.php";</script>';
