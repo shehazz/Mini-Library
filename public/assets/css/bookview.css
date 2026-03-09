@@ -4,33 +4,55 @@
     --main-light: #4E6A85;
     --bg: #F4F7F9;
     --card: #FFFFFF;
-    --sidebar-bg: #F8FAF9;
+    --sidebar-bg: #2C3E50;
     --accent: #0891B2;
     --success: #6B8E61;
     --danger: #E74C3C;
-    --text-dark: #2C3E50;
-    --text-muted: #7F8C8D;
+    --text-light: #ecf0f1;
+    --text-muted: #95a5a6;
     --border: #DCE4EC;
-    --hover-success:#182b13;
+}
+
+.bname {
+    color: var(--main);
+    font-weight: bold;
+}
+
+.coverpage {
+    background: var(--main-light);
+    background-size: cover;
+    background-position: center;
+    height: 250px;
+    width: 100%;
+}
+
+.overlap-content {
+    margin-top: -70px;
 }
 
 .borrowbtn {
-    background-color: var(--success);
-    width: 220px;
-    height: auto;
-    align-items: center;
-    justify-content: center;
+    background-color: var(--main-light);
     border: none;
     font-weight: bold;
-    color: var(--card);
+    color: white;
+    transition: 0.3s;
+    padding: 10px 25px;
+    width: 100%;
 }
 
 .borrowbtn:hover {
-    background-color: var(--hover-success);
-    width: 220px;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    font-weight: bold;
-    color: var(--card);
+    background-color: var(--main-dark);
+    color: white;
+}
+
+.text1 {
+    color: var(--main);
+}
+
+.text2 {
+    color: var(--main-light);
+}
+
+.vertical-line {
+    min-width: 80px;
 }

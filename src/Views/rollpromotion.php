@@ -73,12 +73,15 @@ $roles = $RollPromotionController->getAllRoles();
     <link rel="stylesheet" href="../../public/assets/css/rollpromotion.css">
 </head>
 
-<body class="bg-light">
+<body>
 
     <?php include '../../src/Includes/navsidebar.php' ?>
 
-    <main class="content" id="main-content">
-        <div class="container-fluid">
+    <div class="content d-flex flex-column flex-grow-1" id="main-content">
+
+        <?php include '../Includes/navbar.php' ?>
+
+        <div class="container-fluid mt-5">
 
             <div class="row mb-5 align-items-center">
                 <div class="col">
@@ -213,7 +216,9 @@ $roles = $RollPromotionController->getAllRoles();
 
                 fetch('', {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
                         body: 'action=deleteUser&userId=' + userId
                     })
                     .then(response => response.json())
@@ -228,7 +233,9 @@ $roles = $RollPromotionController->getAllRoles();
             function loadUserData(userId) {
                 fetch('', {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
                         body: 'action=getUserById&userId=' + userId
                     })
                     .then(response => response.json())
@@ -259,16 +266,18 @@ $roles = $RollPromotionController->getAllRoles();
                 e.preventDefault();
 
                 const body = 'action=updateUser' +
-                    '&userId='   + document.getElementById('updateUserId').value +
-                    '&name='     + encodeURIComponent(document.getElementById('updateUserName').value) +
+                    '&userId=' + document.getElementById('updateUserId').value +
+                    '&name=' + encodeURIComponent(document.getElementById('updateUserName').value) +
                     '&username=' + encodeURIComponent(document.getElementById('updateUserUsername').value) +
-                    '&email='    + encodeURIComponent(document.getElementById('updateUserEmail').value) +
+                    '&email=' + encodeURIComponent(document.getElementById('updateUserEmail').value) +
                     '&password=' + encodeURIComponent(document.getElementById('updateUserPassword').value) +
-                    '&roleId='   + document.getElementById('updateUserRole').value;
+                    '&roleId=' + document.getElementById('updateUserRole').value;
 
                 fetch('', {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
                         body: body
                     })
                     .then(response => response.json())
@@ -295,7 +304,9 @@ $roles = $RollPromotionController->getAllRoles();
 
                 fetch('', {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
                         body: 'action=searchUsers&search=' + encodeURIComponent(searchTerm)
                     })
                     .then(response => response.json())
@@ -347,7 +358,8 @@ $roles = $RollPromotionController->getAllRoles();
             }
         </script>
 
-    </main>
+        </main>
 
 </body>
+
 </html>
