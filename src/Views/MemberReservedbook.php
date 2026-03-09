@@ -1,67 +1,3 @@
-<?php
-
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-require_once '../Controllers/RollPromotionController.php';
-
-$RollPromotionController = new RollPromotionController();
-
-// Router — handles all AJAX POST requests from the page
-if (isset($_POST['action'])) {
-    header('Content-Type: application/json');
-
-    if (!isset($_SESSION['username'])) {
-        echo json_encode(['success' => false, 'message' => 'Unauthorized']);
-        exit();
-    }
-
-    $action = $_POST['action'];
-
-    switch ($action) {
-        case 'getAllUsers':
-            echo json_encode(['success' => true, 'data' => $RollPromotionController->getAllUsers()]);
-            break;
-        case 'getUserById':
-            $userId = isset($_POST['userId']) ? intval($_POST['userId']) : 0;
-            $user = $RollPromotionController->getUserById($userId);
-            echo $user
-                ? json_encode(['success' => true, 'data' => $user])
-                : json_encode(['success' => false, 'message' => 'User not found']);
-            break;
-        case 'getAllRoles':
-            echo json_encode(['success' => true, 'data' => $RollPromotionController->getAllRoles()]);
-            break;
-        case 'addRole':
-            echo json_encode($RollPromotionController->addRole());
-            break;
-        case 'updateUser':
-            echo json_encode($RollPromotionController->updateUser());
-            break;
-        case 'deleteUser':
-            echo json_encode($RollPromotionController->deleteUser());
-            break;
-        case 'searchUsers':
-            echo json_encode($RollPromotionController->searchUsers());
-            break;
-        default:
-            echo json_encode(['success' => false, 'message' => 'Invalid action']);
-            break;
-    }
-    exit;
-}
-
-// Page load — fetch data for initial table render
-if (!isset($_SESSION['username'])) {
-    header('Location: ../Views/login.php');
-    exit();
-}
-
-$users = $RollPromotionController->getAllUsers();
-$roles = $RollPromotionController->getAllRoles();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -90,13 +26,7 @@ $roles = $RollPromotionController->getAllRoles();
                     <p class="text-muted small mb-0">Control system access levels.</p>
                 </div>
                 <div class="col-md-3 mt-3 mt-md-0">
-                    <div class="input-group input-group-sm">
-                        <span class="input-group-text bg-white border-end-0 text-muted shadow-none">
-                            <i class="bi bi-search"></i>
-                        </span>
-                        <input type="text" id="searchInput" class="form-control border-start-0 ps-0 shadow-none"
-                            placeholder="Search records...">
-                    </div>
+                    
                 </div>
             </div>
 
