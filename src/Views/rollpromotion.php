@@ -1,6 +1,4 @@
 <?php
-<<<<<<< HEAD
-<<<<<<< HEAD
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -91,7 +89,13 @@ $roles = $RollPromotionController->getAllRoles();
                     <p class="text-muted small mb-0">Control system access levels.</p>
                 </div>
                 <div class="col-md-3 mt-3 mt-md-0">
-                    
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text bg-white border-end-0 text-muted shadow-none">
+                            <i class="bi bi-search"></i>
+                        </span>
+                        <input type="text" id="searchInput" class="form-control border-start-0 ps-0 shadow-none"
+                            placeholder="Search records...">
+                    </div>
                 </div>
             </div>
 
