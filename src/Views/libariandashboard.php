@@ -93,12 +93,22 @@
                     </ul>
 
                     <div class="tab-content pt-3" id="quickActionContent">
-                        <div class="tab-pane fade show active" id="overview" role="tabpanel"><?php include '../Includes/overduetable.php'; ?></div>
-                        <div class="tab-pane fade" id="add-book" role="tabpanel"><?php include '../Includes/addbook.php'; ?></div>
-                        <div class="tab-pane fade" id="register" role="tabpanel"><?php include '../Includes/registerstudent.php'; ?></div>
-                        <div class="tab-pane fade" id="issuebook" role="tabpanel"><?php include '../Views/reservebook.php'; ?></div>
-                        <div class="tab-pane fade" id="returnbook" role="tabpanel"><?php include '../Includes/returnbook.php'; ?></div>
+                    <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="tab-overview">
+                        <?php include $_SERVER['DOCUMENT_ROOT'] . '/Mini-Library/src/Views/overduetable.php'; ?>
                     </div>
+                    <div class="tab-pane fade" id="add-book" role="tabpanel" aria-labelledby="tab-add-book">
+                        <?php include $_SERVER['DOCUMENT_ROOT'] . '/Mini-Library/src/Views/Insertbook.php'; ?>
+                    </div>
+                    <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="tab-register">
+                        <?php include $_SERVER['DOCUMENT_ROOT'] . '/Mini-Library/src/Views/registerstudent.php'; ?>
+                    </div>
+                    <div class="tab-pane fade" id="issuebook" role="tabpanel" aria-labelledby="tab-issuebook">
+                        <?php include $_SERVER['DOCUMENT_ROOT'] . '/Mini-Library/src/Views/reservebook.php'; ?>
+                    </div>
+                    <div class="tab-pane fade" id="returnbook" role="tabpanel" aria-labelledby="tab-returnbook">
+                        <?php include $_SERVER['DOCUMENT_ROOT'] . '/Mini-Library/src/Views/returnbook.php'; ?>
+                    </div>
+                </div>
                 </div>
             </div>
         </main>

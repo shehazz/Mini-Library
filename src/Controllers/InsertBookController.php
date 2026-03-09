@@ -1,7 +1,5 @@
 <?php
-/**
- * manage interactions between models and views.
- */
+
 require_once '../Models/InsertBookModel.php';
 
 class BookController
