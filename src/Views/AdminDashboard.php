@@ -37,15 +37,10 @@ $result = mysqli_query($conn, $sql);
 
     <div class="content d-flex flex-column flex-grow-1" id="main-content">
 
-<<<<<<< Kirana
-        <div class="container-fluid">
-            <header class="d-flex justify-content-between align-items-center mb-4 pb-3  shadow-sm">
-=======
         <?php include '../Includes/navbar.php' ?>
 
         <div class="container-fluid mt-5">
             <header class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom bg-white px-3 rounded shadow-sm">
->>>>>>> main
                 <div>
                     <h2 class="h4 mb-0  fw-bold">
                         <i class="bi bi-speedometer2 me-2"></i>Admin Dashboard
