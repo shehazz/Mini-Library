@@ -1,4 +1,5 @@
 <?php
+ob_start();
 // 1. Database Configuration
 $server = "localhost";
 $username = "root";
@@ -31,7 +32,7 @@ $result = mysqli_query($conn, $sql);
     <link rel="stylesheet" href="public/assets/css/rollpromotion.css">
 </head>
 
-<body class="bg-light">
+<body>
 
     <?php include '../../src/Includes/navsidebar.php' ?>
 
@@ -40,14 +41,15 @@ $result = mysqli_query($conn, $sql);
         <?php include '../Includes/navbar.php' ?>
 
         <div class="container-fluid mt-5">
-            <header class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom bg-white px-3 rounded shadow-sm">
+            <header
+                class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom bg-white px-3 rounded shadow-sm">
                 <div>
                     <h2 class="h4 mb-0  fw-bold">
-                        <i class="bi bi-speedometer2 me-2"></i>Admin Dashboard
+                        <i class="bi bi-speedometer2 me-2"></i>Welcome Admin
                     </h2>
                     <small class="text-muted">MiniLibrary Management System</small>
                 </div>
-                
+
             </header>
 
             <!-- <div class="row g-4 mb-4">
@@ -120,7 +122,7 @@ $result = mysqli_query($conn, $sql);
                     <div class="card stat-card p-3 shadow-sm delay-1">
                         <div class="d-flex align-items-center">
                             <div class="p-3 rounded-3 me-3" style="background-color: #F8FAF9;">
-                                <i class="bi bi-people-fill fs-3 text-primary"></i>
+                                <i class="bi bi-people-fill fs-3 "></i>
                             </div>
                             <div>
                                 <p class="text-muted small mb-0">Total Users</p>
@@ -133,7 +135,7 @@ $result = mysqli_query($conn, $sql);
                     <div class="card stat-card p-3 shadow-sm delay-2">
                         <div class="d-flex align-items-center">
                             <div class="p-3 rounded-3 me-3" style="background-color: #F8FAF9;">
-                                <i class="bi bi-person-badge-fill fs-3 text-danger"></i>
+                                <i class="bi bi-person-badge-fill fs-3 "></i>
                             </div>
                             <div>
                                 <p class="text-muted small mb-0">Admins</p>
@@ -168,68 +170,68 @@ $result = mysqli_query($conn, $sql);
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="card border-0 shadow-sm overflow-hidden">
-                <div class="card-header bg-white py-3 border-bottom">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <h5 class="mb-0 fw-bold">User Management</h5>
+                <div class="col-md-3">
+                    <div class="card stat-card p-3 shadow-sm delay-1">
+                        <div class="d-flex align-items-center">
+                            <div class="p-3 rounded-3 me-3" style="background-color: #F8FAF9;">
+                                <i class="bi bi-book text-dark" style="font-size: 1.5rem;"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted small mb-0">Total Books</p>
+                                <h4 class="fw-bold mb-0" style="color: var(--main-dark);">12,450</h4>
+                            </div>
                         </div>
-                        
                     </div>
                 </div>
-                <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0">
-                        <thead class="bg-light-subtle border-bottom">
-                            <tr class="text-muted small text-uppercase">
-                                
-                                <th class="ps-4 py-3 border-0">Name</th>
-                                <th class="ps-4 py-3 border-0">Username</th>
-                                <th class="ps-4 py-3 border-0">NIC</th>
-                                <th class="ps-4 py-3 border-0">Email</th>
-                                <th class="ps-4 py-3 border-0">Role</th>
-                                
-                            </tr>
-                        </thead>
-                        <tbody class="border-top-0" id="usersTableBody">
-                            <?php
-                            if (mysqli_num_rows($result) > 0) {
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    echo "<tr>";
-                                    
-                                    echo "<td class='ps-4 fw-bold'>" . htmlspecialchars($row["name"]) . "</td>";
-                                    echo "<td>" . htmlspecialchars($row["username"]) . "</td>";
-                                    echo "<td class='text-muted'>" . htmlspecialchars($row["nic"]) . "</td>";
-                                    echo "<td>
-                                            <a href='mailto:" . htmlspecialchars($row["email"]) . "' class='text-decoration-none'>
-                                                <i class='bi bi-envelope me-1'></i>" . htmlspecialchars($row["email"]) . "
-                                            </a>
-                                          </td>";
-                                    echo "<td class='pe-4'>
-                                            <span class='badge bg-light text-dark border'>" . htmlspecialchars($row["role"]) . "</span>
-                                          </td>";
-                                    echo "</tr>";
-                                }
-                            } else {
-                                echo "<tr><td colspan='5' class='text-center py-5 text-muted'>
-                                        <i class='bi bi-folder-x display-1 d-block mb-3'></i>
-                                        No results found in the database.
-                                      </td></tr>";
-                            }
-                            ?>
-                        </tbody>
-                    </table>
+                <div class="col-md-3">
+                    <div class="card stat-card p-3 shadow-sm delay-2">
+                        <div class="d-flex align-items-center">
+                            <div class="p-3 rounded-3 me-3" style="background-color: #F8FAF9;">
+                                <i class="bi bi-journal-check text-dark" style="font-size: 1.5rem;"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted small mb-0">Borrowed</p>
+                                <h4 class="fw-bold mb-0" style="color: var(--main-dark);">680</h4>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-                <div class="card-footer bg-white border-top-0 py-3">
-                    <nav class="d-flex justify-content-between align-items-center">
-                        
-                        
-                    </nav>
+                <div class="col-md-3">
+                        <div class="card stat-card p-3 shadow-sm delay-3">
+                            <div class="d-flex align-items-center">
+                                <div class="p-3 rounded-3 me-3" style="background-color: #FEE2E2;">
+                                    <i class="bi bi-exclamation-triangle text-danger" style="font-size: 1.5rem;"></i>
+                                </div>
+                                <div>
+                                    <p class="text-muted small mb-0">Overdue</p>
+                                    <h4 class="fw-bold mb-0 text-danger">24</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card border-0 shadow-sm p-4" style="border-radius: 12px; background-color: #fff;">
+                    <h5 class="fw-bold mb-3" style="color: var(--main-dark);">Quick Actions</h5>
+                    <ul class="nav nav-tabs border-0 mb-2" id="quickActionTabs" role="tablist" style="border-bottom: 1px solid #E2E8F0 !important;">
+                        <li class="nav-item"><button class="nav-link active custom-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button">Overview</button></li>
+                        <li class="nav-item"><button class="nav-link custom-tab" data-bs-toggle="tab" data-bs-target="#add-book" type="button">Add New Book</button></li>
+                        <li class="nav-item"><button class="nav-link custom-tab" data-bs-toggle="tab" data-bs-target="#register" type="button">Register User</button></li>
+                        <li class="nav-item"><button class="nav-link custom-tab" data-bs-toggle="tab" data-bs-target="#issuebook" type="button">Reserve Book</button></li>
+                        <li class="nav-item"><button class="nav-link custom-tab" data-bs-toggle="tab" data-bs-target="#returnbook" type="button">Return Book</button></li>
+                    </ul>
+
+                    <div class="tab-content pt-3" id="quickActionContent">
+                        <div class="tab-pane fade show active" id="overview" role="tabpanel"><?php include '../Includes/overduetable.php'; ?></div>
+                        <div class="tab-pane fade" id="add-book" role="tabpanel"><?php include '../Includes/addbook.php'; ?></div>
+                        <div class="tab-pane fade" id="register" role="tabpanel"><?php include '../Views/registerstudent.php'; ?></div>
+                        <div class="tab-pane fade" id="issuebook" role="tabpanel"><?php include '../Views/reservebook.php'; ?></div>
+                        <div class="tab-pane fade" id="returnbook" role="tabpanel"><?php include '../Includes/returnbook.php'; ?></div>
+                    </div>
                 </div>
+
             </div>
+
+
         </div>
 
         <script src="public/assets/js/navsidebar.js"></script>
