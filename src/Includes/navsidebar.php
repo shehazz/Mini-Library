@@ -24,6 +24,7 @@
                 <li class="rounded-4"><a href="../Views/rollpromotion.php"><i class="bi bi-person-vcard-fill"></i><span class="sidebtn">Manage Roles</span></a></li>
                 <li class="rounded-4"><a href="#"><i class="bi bi-people-fill"></i><span class="sidebtn">Manage Members</span></a></li>
                 <li class="rounded-4"><a href="#"><i class="bi bi-journal-plus"></i><span class="sidebtn">Manage Books</span></a></li>
+                <li class="rounded-4"><a href="#"><i class="bi bi-journal-plus"></i><span class="sidebtn">Reserved Books</span></a></li>
                 <li class="rounded-4 align-items-start mb-auto"><a href="../Views/finesview.php"><i class="bi bi-cash-stack"></i><span class="sidebtn">Fines & Payments</span></a></li>
                 <li class="rounded-4 align-items-end mt-auto"><a href="#"><i class="bi bi-gear-fill"></i><span class="sidebtn">Settings</span></a></li>
                 <li class="rounded-4"><a href="#"><i class="bi bi-box-arrow-right"></i><span class="sidebtn">Logout</span></a></li>
