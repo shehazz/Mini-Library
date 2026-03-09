@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../../public/assets/css/dashboradstyle.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 =======
@@ -86,6 +87,12 @@
                                     <p class="text-muted small mb-0">Members</p>
                                     <h4 class="fw-bold mb-0" style="color: var(--main-dark);">15,000</h4>
 =======
+=======
+</head>
+
+<body>
+
+>>>>>>> 66c717b391986eed31f2354722d6452803ae4aa0
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/Mini-Library/src/Includes/navsidebar.php'; ?>
 
     <main class="main-content" style="margin-left: var(--sidebar-width); transition: margin 0.3s ease;">
@@ -123,11 +130,15 @@
                                         style="<?= !$stat['danger'] ? 'color: var(--main-dark);' : '' ?>">
                                         <?= $stat['value'] ?>
                                     </h4>
+<<<<<<< HEAD
 >>>>>>> 7f1600e (Refactor controllers/views; update dashboard UI)
+=======
+>>>>>>> 66c717b391986eed31f2354722d6452803ae4aa0
                                 </div>
                             </div>
                         </div>
                     </div>
+<<<<<<< HEAD
 <<<<<<< HEAD
                 </div>
 
@@ -164,6 +175,12 @@
 =======
 
 >>>>>>> 66c717b (correction)
+=======
+                <?php endforeach; ?>
+            </div>
+
+
+>>>>>>> 66c717b391986eed31f2354722d6452803ae4aa0
             <div class="card border-0 shadow-sm p-4" style="border-radius: 12px; background-color: #fff;">
                 <h5 class="fw-bold mb-3" style="color: var(--main-dark);">Quick Actions</h5>
 
@@ -213,9 +230,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 <<<<<<< HEAD
+<<<<<<< HEAD
 </html>
 >>>>>>> 7f1600e (Refactor controllers/views; update dashboard UI)
 =======
 
 </html>
 >>>>>>> 66c717b (correction)
+=======
+
+</html>
+>>>>>>> 66c717b391986eed31f2354722d6452803ae4aa0

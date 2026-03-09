@@ -1,11 +1,15 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 =======
 require_once '../Controllers/RollPromotionController.php';
 >>>>>>> 7f1600e (Refactor controllers/views; update dashboard UI)
+=======
+require_once '../Controllers/RollPromotionController.php';
+>>>>>>> 66c717b391986eed31f2354722d6452803ae4aa0
 
 require_once '../Controllers/RollPromotionController.php';
 
