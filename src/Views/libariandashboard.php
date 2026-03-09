@@ -92,7 +92,11 @@
 
 <body>
 
+<<<<<<< HEAD
 >>>>>>> 7f1600e (Refactor controllers/views; update dashboard UI)
+=======
+>>>>>>> 66c717b391986eed31f2354722d6452803ae4aa0
+>>>>>>> 80a064e3a9c10b09a020d08483bb605fc5e0c67a
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/Mini-Library/src/Includes/navsidebar.php'; ?>
 
     <main class="main-content" style="margin-left: var(--sidebar-width); transition: margin 0.3s ease;">
@@ -161,9 +165,14 @@
                                         <?= $stat['value'] ?>
                                     </h4>
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 7f1600e (Refactor controllers/views; update dashboard UI)
 =======
+=======
+>>>>>>> 80a064e3a9c10b09a020d08483bb605fc5e0c67a
 >>>>>>> 7f1600e (Refactor controllers/views; update dashboard UI)
+=======
+>>>>>>> 66c717b391986eed31f2354722d6452803ae4aa0
                                 </div>
                             </div>
                         </div>
@@ -210,11 +219,16 @@
             </div>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             
 >>>>>>> 7f1600e (Refactor controllers/views; update dashboard UI)
 =======
 
 >>>>>>> 66c717b (correction)
+=======
+
+>>>>>>> 66c717b391986eed31f2354722d6452803ae4aa0
+>>>>>>> 80a064e3a9c10b09a020d08483bb605fc5e0c67a
             <div class="card border-0 shadow-sm p-4" style="border-radius: 12px; background-color: #fff;">
                 <h5 class="fw-bold mb-3" style="color: var(--main-dark);">Quick Actions</h5>
 
@@ -319,6 +333,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 </html>
 >>>>>>> 7f1600e (Refactor controllers/views; update dashboard UI)
 =======
@@ -326,9 +341,15 @@
 </html>
 >>>>>>> 66c717b (correction)
 =======
+=======
+>>>>>>> 80a064e3a9c10b09a020d08483bb605fc5e0c67a
 </html>
 >>>>>>> 7f1600e (Refactor controllers/views; update dashboard UI)
 =======
 
 </html>
 >>>>>>> 66c717b (correction)
+=======
+
+</html>
+>>>>>>> 66c717b391986eed31f2354722d6452803ae4aa0
