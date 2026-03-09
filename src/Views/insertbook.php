@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Add Book | Librarian Dashboard</title>
+    <title>Add Book</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../../assets/css/dashboradstyle.css">
@@ -26,7 +26,7 @@
             </div>
 
             <div class="card-body p-4">
-                <form action="/Mini-Library-1/src/Controllers/insertbook.php" method="POST" enctype="multipart/form-data"
+                <form action="/Mini-Library/src/Controllers/InsertBookController.php" method="POST" enctype="multipart/form-data"
                     onsubmit="return validate()">
                     <div class="row g-4">
 
