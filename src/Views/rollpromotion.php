@@ -1,19 +1,7 @@
 <?php
-<<<<<<< HEAD
-<<<<<<< HEAD
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-=======
-require_once '../Controllers/RollPromotionController.php';
->>>>>>> 7f1600e (Refactor controllers/views; update dashboard UI)
-=======
-require_once '../Controllers/RollPromotionController.php';
-<<<<<<< HEAD
->>>>>>> 7f1600e (Refactor controllers/views; update dashboard UI)
-=======
->>>>>>> 66c717b391986eed31f2354722d6452803ae4aa0
->>>>>>> 80a064e3a9c10b09a020d08483bb605fc5e0c67a
 
 require_once '../Controllers/RollPromotionController.php';
 
@@ -101,7 +89,13 @@ $roles = $RollPromotionController->getAllRoles();
                     <p class="text-muted small mb-0">Control system access levels.</p>
                 </div>
                 <div class="col-md-3 mt-3 mt-md-0">
-                    
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text bg-white border-end-0 text-muted shadow-none">
+                            <i class="bi bi-search"></i>
+                        </span>
+                        <input type="text" id="searchInput" class="form-control border-start-0 ps-0 shadow-none"
+                            placeholder="Search records...">
+                    </div>
                 </div>
             </div>
 
