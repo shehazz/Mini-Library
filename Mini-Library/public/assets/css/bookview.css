@@ -1,0 +1,36 @@
+:root {
+    --main: #34495E;
+    --main-dark: #2C3E50;
+    --main-light: #4E6A85;
+    --bg: #F4F7F9;
+    --card: #FFFFFF;
+    --sidebar-bg: #F8FAF9;
+    --accent: #0891B2;
+    --success: #6B8E61;
+    --danger: #E74C3C;
+    --text-dark: #2C3E50;
+    --text-muted: #7F8C8D;
+    --border: #DCE4EC;
+    --hover-success:#182b13;
+}
+
+.borrowbtn {
+    background-color: var(--success);
+    width: 220px;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    font-weight: bold;
+    color: var(--card);
+}
+
+.borrowbtn:hover {
+    background-color: var(--hover-success);
+    width: 220px;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    font-weight: bold;
+    color: var(--card);
+}
