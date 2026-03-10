@@ -1,0 +1,88 @@
+:root {
+    --main: #34495E;
+    --main-dark: #2C3E50;
+    --main-light: #4E6A85;
+    --bg: #F4F7F9;
+    --card: #FFFFFF;
+    --sidebar-bg: #2C3E50;
+    --accent: #0891B2;
+    --success: #6B8E61;
+    --danger: #E74C3C;
+    --text-light: #ecf0f1;
+    --text-muted: #95a5a6;
+    --border: #DCE4EC;
+}
+
+.bname {
+    color: var(--main);
+    font-weight: bold;
+}
+
+.text1 {
+    color: var(--main);
+}
+
+.text2 {
+    color: var(--main-light);
+}
+
+.book-card {
+    max-width: 900px;
+    margin: 50px auto;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    padding: 30px;
+}
+
+.rules-box {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 5px solid var(--main-light);
+}
+
+.badge {
+    background-color: var(--main-light);
+}
+
+.buttn1 {
+    background-color: var(--main-light);
+    border: none;
+    height: 50px;
+    width: 350px;
+}
+.buttn1:disabled {
+    background-color: #c1caf3;
+    border-color: var(--main-dark);
+    color: var(--main);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+.buttn1:hover {
+    background-color: var(--main-dark);
+    border: none;
+    height: 50px;
+    width: 350px;
+}
+
+.buttn2 {
+    border: none;
+    background-color: #d4d9f1;
+    color: var(--main-dark);
+    height: 50px;
+    width: 350px;
+}
+
+.buttn2:hover {
+    border-color: var(--main-dark);
+    border: none;
+    background-color: var(--main-dark);
+    color: var(--bg);
+    height: 50px;
+    width: 350px;
+}
+
+.vertical-line{
+    min-width: 80px;
+}
+

@@ -1,5 +1,5 @@
 <?php
-    include 'src/Controllers/BookController.php';
+include '../Controllers/reservebookcontroller.php';
 ?>
 
 <!DOCTYPE html>
@@ -12,79 +12,55 @@
         <?php echo $book['bookname']; ?>
     </title>
     <link rel="stylesheet" href="../../public/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../public/assets/css/reservebook.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <style>
-        
-        .book-card {
-            max-width: 900px;
-            margin: 50px auto;
-            border: 1px solid #ddd;
-            border-radius: 15px;
-            padding: 30px;
-        }
-
-        .rules-box {
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 5px solid #374e30;
-        }
-
-        .badge {
-            background-color: #5b7254;
-        }
-
-        .buttn1 {
-            background-color: #6B8E61;
-            height: 50px;
-            width: 350px;
-        }
-
-        .buttn2 {
-            border-color: #6B8E61;
-            background-color: #e9f3e6;
-            color: #6B8E61;
-            height: 50px;
-            width: 350px;
-
-        }
-    </style>
 </head>
 
-<body class="bg-light">
+<body>
 
     <div class="container">
         <div class="book-card bg-white shadow">
             <div class="row">
                 <div class="col-md-7">
-                    <h1 class="display-6 fw-bold"><?php echo $bookname; ?></h1>
-                    <p class="lead text-muted">By <?php echo $author; ?></p>
-                    <p><strong>Category:</strong> <span
-                            class="badge d-flex p-2 justify-content-between align-items-between"><?php echo $category; ?></span>
-                    </p>
+                    <h1 class="fw-bold bname mb-1"><?php echo $bookname; ?></h1>
+                    <span class="fs-5 mb-3 text2">by <?php echo $author; ?></span>
+
+                    <div>
+                        <div class="row g-0 mb-1 align-items-center">
+                            <div class="col-auto text1 vertical-line">ISBN</div>
+                            <div class="col-auto px-2 text1">:</div>
+                            <div class="col text2 ps-1"><?php echo $isbn; ?></div>
+                        </div>
+
+                        <div class="row g-0 mb-1 align-items-center">
+                            <div class="col-auto text1 vertical-line">Category</div>
+                            <div class="col-auto px-2 text1">:</div>
+                            <div class="col text2 ps-1"><?php echo $category; ?></div>
+                        </div>
+                    </div>
 
                     <hr class="my-4">
 
-                    <div class="rules-section">
-                        <h5 class="fw-bold">Borrowing Rules</h5>
+                    <div>
+                        <h5 class="fw-bold text1">Borrowing Rules</h5>
                         <div class="rules-box small">
-                            <ul class="mb-0">
-                                <li><strong>Loan Period:</strong> Must return within 2 weeks (14 days).</li>
-                                <li><strong>Overdue Fine:</strong> After 2 weeks, a fine of
-                                    <strong>$<?php echo number_format($calculatedFine, 2); ?></strong>
-                                    (<?php echo $fineRate; ?>%) will be added daily until returned.
-                                </li>
-                                <li><strong>Damage Policy:</strong> If the book is damaged, you must inform the
-                                    librarian and pay the full value of
-                                    <strong>$<?php echo number_format($bookPrice, 2); ?></strong>.
-                                </li>
-                            </ul>
+
+                            <p><i class="bi bi-exclamation-diamond-fill text1 me-2"></i> <strong class="text1"> Loan Period  :</strong> <span class="text2"> Must return within 2 weeks (14 days).</span></p>
+
+                            <p><i class="bi bi-exclamation-diamond-fill text1 me-2"></i> <strong class="text1">Overdue Fine :</strong> 
+                            <span class="text2"> After 2 weeks, a fine of <strong>$<?php echo number_format($fineamount, 2); ?></strong>
+                            (<?php echo $dailyrate; ?>%) will be added <span class="ms-4"> daily until returned.</span></span></p>
+
+                            <p><i class="bi bi-exclamation-diamond-fill text1 me-2"></i><strong class="text1"> Damage Policy :</strong>
+                            <span class="text2"> If the book is damaged, you must inform the <span class="ms-4"> librarian and pay the full value of
+                            <strong>$<?php echo number_format($bookprice, 2); ?></strong>.</span></span></p>
+  
                         </div>
                     </div>
 
                     <div class="form-check mt-4">
                         <input class="form-check-input" type="checkbox" value="" id="ruleCheck" required>
-                        <label class="form-check-label fw-bold" for="ruleCheck">
+                        <label class="form-check-label fw-bold text1" for="ruleCheck">
                             I agree to the library rules and conditions.
                         </label>
                     </div>
@@ -109,7 +85,8 @@
             </div>
         </div>
     </div>
-    <script src="public/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../../public/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../../public/assets/js/reservebook.js"></script>
 </body>
 
 </html>

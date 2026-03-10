@@ -1,5 +1,5 @@
 <?php
-include 'src/Controllers/BookController.php';
+include '../Controllers/BookController.php';
 ?>
 
 <!DOCTYPE html>
@@ -8,31 +8,10 @@ include 'src/Controllers/BookController.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        Search
-    </title>
+    <title>Search Page</title>
     <link rel="stylesheet" href="../../public/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../public/assets/css/searchpage.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-
-    <style>
-        .rounded-pill-start {
-            border-radius: 50rem 0 0 50rem;
-        }
-
-        .rounded-pill-end {
-            border-radius: 0 50rem 50rem 0;
-        }
-
-        .book-card {
-            transition: transform 0.3s ease, shadow 0.3s ease;
-        }
-
-        .book-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(8, 43, 7, 0.1);
-        }
-    </style>
-
 </head>
 
 <body class="bg-light">
