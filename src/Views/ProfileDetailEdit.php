@@ -46,47 +46,75 @@ $user = $result->fetch_assoc();
 
         <?php include '../Includes/navbar.php' ?>
 
+        <?php
+
+        require_once '../../Config/DBConnection.php';
+
+        if (!isset($_SESSION['username'])) {
+            header("Location: ../../index.php");
+            exit();
+        }
+
+        $db = new DBConnection();
+        $conn = $db->getConnection();
+
+        $logged_username = $_SESSION['username'];
+        $query = "SELECT name, nic, email FROM user WHERE username = ?";
+
+        $stat = $conn->prepare($query);
+        $stat->bind_param("s", $logged_username);
+        $stat->execute();
+        $result = $stat->get_result();
+
+        $user = $result->fetch_assoc();
+
+        ?>
+
         <main class="flex-grow-1" style="overflow-y: auto;">
 
             <div class="container">
 
                 <div class="row g-4">
 
-                    <div class="col-lg-4">
-                        <div class="card border-0 shadow-sm rounded-4 text-center p-4">
-                            <div class="position-relative d-inline-block mx-auto mb-3">
-                                <img src="https://ui-avatars.com/api/?name">
-                            </div>
-                            <h4 class="fw-bold mb-1"><?= $user['name'] ?></h4>
-                            <p class="text-muted small mb-3">@<?= $_SESSION['username'] ?></p>
-                            <div class="d-grid gap-2">
-
-                                <a href="../Views/ProfileDetailEdit.php" id="editbtn" class="text-decoration-none">
-                                    Edit Profile
-                                </a>
-                                <a href="../Controllers/logoutController.php" id="logoutbtn" class="text-decoration-none">
-                                    Logout
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="col-lg-8">
                         <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
-                            <h5 class="fw-bold mb-4"><i class="bi bi-person-lines-fill me-2"></i>Personal Information</h5>
-                            <div class="row mb-3">
-                                <div class="col-sm-4 text-secondary">Full Name</div>
-                                <div class="col-sm-8 fw-semibold"><?= $user['name'] ?></div>
-                            </div>
-                            <hr class="text-light">
-                            <div class="row mb-3">
-                                <div class="col-sm-4 text-secondary">NIC Number</div>
-                                <div class="col-sm-8"><?= $user['nic'] ?></div>
-                            </div>
-                            <hr class="text-light">
-                            <div class="row mb-3">
-                                <div class="col-sm-4 text-secondary">Email Address</div>
-                                <div class="col-sm-8 text-primary"><?= $user['email'] ?></div>
+                            <h5 class="fw-bold mb-4"><i class="bi bi-person-lines-fill me-2"></i>Edit Personal Information</h5>
+
+                            <div class="container mt-5">
+
+                                    <form action="../Controllers/ProfileUpdateController.php" method="POST">
+
+                                        <div class="mb-3">
+                                            <label class="form-label text-secondary">Full Name</label>
+                                            <input type="text" name="fullname" class="form-control" value="<?= htmlspecialchars($user['name']) ?>" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label text-secondary">Email Address</label>
+                                            <input type="email" name="email" class="form-control" value="<?= htmlspecialchars($user['email']) ?>" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label text-secondary">NIC Number</label>
+                                            <input type="text" name="nic" class="form-control" value="<?= htmlspecialchars($user['nic']) ?>" readonly>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label text-secondary">Username</label>
+                                            <input type="text" name="username" class="form-control" value="<?= htmlspecialchars($_SESSION['username']) ?>" readonly>
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <label class="form-label text-secondary">New Password (leave blank to keep current)</label>
+                                            <input type="password" name="password" class="form-control">
+                                        </div>
+
+                                        <div class="d-flex gap-2">
+                                            <button type="submit" name="update_profile" id="submitbtn" class="btn btn-primary px-4 rounded-pill">Save Changes</button>
+                                            <a href="profile.php" class="btn btn-light px-4 rounded-pill">Cancel</a>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
 
