@@ -13,6 +13,9 @@
     --border: #DCE4EC;
 }
 
+
+/* EDIT BUTTON */
+
 #editbtn {
     justify-content: center;
     align-items: center;
@@ -39,6 +42,8 @@
 }
 
 
+/* LOGOUT BUTTON */
+
 #logoutbtn {
     justify-content: center;
     align-items: center;
@@ -59,7 +64,63 @@
     transform: translateY(-2px);
 }
 
-#logout:active {
+#logoutbtn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* SUBMIT BUTTON */
+
+#submitbtn {
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    padding: 6px;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: inline-flex;
+}
+
+#submitbtn:hover {
+    background: var(--main);
+    color: var(--bg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+#submitbtn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+
+/* CANCEL BUTTON */
+
+#cancelbtn {
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    padding: 6px;
+    background-color: var(--bg);
+    color: var(--main);
+    border: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: inline-flex;
+}
+
+#cancelbtn:hover {
+    background-color: var(--bg);
+    color: var(--main);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+#cancelbtn:active {
     transform: translateY(2px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
