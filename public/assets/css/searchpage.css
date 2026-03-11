@@ -1,0 +1,16 @@
+.rounded-pill-start {
+    border-radius: 50rem 0 0 50rem;
+}
+
+.rounded-pill-end {
+    border-radius: 0 50rem 50rem 0;
+}
+
+.book-card {
+    transition: transform 0.3s ease, shadow 0.3s ease;
+}
+
+.book-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(8, 43, 7, 0.1);
+}
