@@ -22,7 +22,7 @@ class LoginController
             if (!empty($username) && !empty($password)) {
                 $user = $this->loginmodel->verifyLogin($username, $password);
                 if ($user) {
-                    $_SESSION['adminid'] = $user['adminid'];
+                    $_SESSION['id'] = $user['id'];
                     $_SESSION['username'] = $user['username'];
                     $_SESSION['roleid']   = $user['roleid'];
 
