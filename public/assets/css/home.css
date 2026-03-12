@@ -33,4 +33,5 @@
 #borrowbtn {
     background: var(--accent);
     color: var(--bg);
+    padding: 15px;
 }

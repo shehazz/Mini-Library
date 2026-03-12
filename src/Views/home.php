@@ -48,20 +48,19 @@
                                         <h6 class="card-subtitle mb-2">by <?php echo $book['author']; ?></h6>
                                         <p class="small">ISBN: <?php echo $book['isbn']; ?></p>
 
-
                                         <?php if ($book['available_count'] > 0): ?>
                                             <div class="">
                                                 <span class="badge bg-success">Available</span>
                                             </div>
                                             <div class="d-flex justify-content-center align-items-center w-auto mt-5">
-                                                <button class="btn btn-sm px-5 py-2 rounded-4" id="borrowbtn">Borrow</button>
+                                                <button class="btn btn-sm rounded-4 px-5" id="borrowbtn">Borrow</button>
                                             </div>
                                         <?php else: ?>
                                             <div class="">
                                                 <span class="badge bg-danger">Issued</span>
                                             </div>
                                             <div class="d-flex justify-content-center align-items-center w-auto mt-5">
-                                                <button class="btn btn-sm px-5 py-2 rounded-4" id="borrowbtn" disabled>Borrow</button>
+                                                <button class="btn btn-sm rounded-4 px-5" id="borrowbtn" disabled>Borrow</button>
                                             </div>
                                         <?php endif; ?>
                                     </div>
@@ -72,7 +71,6 @@
 
                 </div>
             </div>
-
 
         </main>
 
