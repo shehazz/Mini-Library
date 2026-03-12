@@ -1,3 +1,6 @@
+<?php
+require_once __DIR__ . '/../Controllers/OverdueBookController.php';
+?>
 <html lang="en">
 
 <head>
@@ -12,7 +15,6 @@
 
 <body>
     <?php include '../../src/Includes/navsidebar.php' ?>
-
 
     <div class="content d-flex flex-column flex-grow-1" id="main-content">
 
@@ -62,7 +64,7 @@
                                 </div>
                                 <div>
                                     <p class="text-muted small mb-0">Overdue</p>
-                                    <h4 class="fw-bold mb-0 text-danger">24</h4>
+                                    <h4 class="fw-bold mb-0 text-danger"><?php echo $overdueCount; ?></h4>
                                 </div>
                             </div>
                         </div>
@@ -93,11 +95,11 @@
                     </ul>
 
                     <div class="tab-content pt-3" id="quickActionContent">
-                        <div class="tab-pane fade show active" id="overview" role="tabpanel"><?php include '../Includes/overduetable.php'; ?></div>
-                        <div class="tab-pane fade" id="add-book" role="tabpanel"><?php include '../Includes/addbook.php'; ?></div>
-                        <div class="tab-pane fade" id="register" role="tabpanel"><?php include '../Includes/registerstudent.php'; ?></div>
-                        <div class="tab-pane fade" id="issuebook" role="tabpanel"><?php include '../Views/reservebook.php'; ?></div>
-                        <div class="tab-pane fade" id="returnbook" role="tabpanel"><?php include '../Includes/returnbook.php'; ?></div>
+                        <div class="tab-pane fade show active" id="overview" role="tabpanel"><?php include __DIR__ . '/overduetable.php'; ?></div>
+                        <div class="tab-pane fade" id="add-book" role="tabpanel"><?php include __DIR__ . '/insertbook.php'; ?></div>
+                        <div class="tab-pane fade" id="register" role="tabpanel"><?php include __DIR__ . '/registerstudent.php'; ?></div>
+                        <div class="tab-pane fade" id="issuebook" role="tabpanel"><?php include __DIR__ . '/reservebook.php'; ?></div>
+                        <div class="tab-pane fade" id="returnbook" role="tabpanel"><?php include __DIR__ . '/returnbook.php'; ?></div>
                     </div>
                 </div>
             </div>

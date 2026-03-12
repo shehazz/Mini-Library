@@ -1,26 +1,29 @@
 <?php
-/**
- * manage interactions between models and views.
- */
-require_once '../Models/InsertBookModel.php';
 
-class BookController
+require_once __DIR__ . '/../Models/InsertBookModel.php';
+
+class InsertBookController
 {
-
     private $bookModel;
 
     public function __construct()
     {
-        $this->bookModel = new BookModel();
+        $this->bookModel = new InsertBookModel();
     }
 
-    // send all form data to BookModel
+
     public function formSubmit()
     {
-        if (isset($_POST['bookname']) && isset($_POST['isbn']) && isset($_POST['category']) && isset($_POST['author'])) {
-
-            if (!empty($_POST['bookname']) && !empty($_POST['isbn']) && !empty($_POST['category']) && !empty($_POST['author'])) {
-
+        if (
+            isset($_POST['bookname']) && isset($_POST['isbn']) && isset($_POST['category']) &&
+            isset($_POST['author']) && isset($_POST['bookprice']) && isset($_POST['bookquantity']) &&
+            isset($_POST['description'])
+        ) {
+            if (
+                !empty($_POST['bookname']) && !empty($_POST['isbn']) && !empty($_POST['category']) &&
+                !empty($_POST['author']) && !empty($_POST['bookprice']) && !empty($_POST['bookquantity']) &&
+                !empty($_POST['description'])
+            ) {
                 $bookname = trim(htmlspecialchars($_POST['bookname']));
                 $isbn = trim(htmlspecialchars($_POST['isbn']));
                 $category = trim(htmlspecialchars($_POST['category']));
@@ -45,15 +48,28 @@ class BookController
                     $bookquantity
                 );
 
-                if ($result) {
+                $result = $this->bookModel->insertBook(
+                    $bookname,
+                    $isbn,
+                    $category,
+                    $author,
+                    $imgData,
+                    $bookprice,
+                    $description,
+                    $bookquantity
+                );
+
+                if ($result === 'duplicate') {
+                    header("Location: /Mini-Library/src/Views/libariandashboard.php?status=duplicate");
+                } else if ($result) {
                     header("Location: /Mini-Library/src/Views/libariandashboard.php?status=success");
                 } else {
-                    header("Location: /Mini-Library/src/Includes/addbook.php?status=error");
+                    header("Location: /Mini-Library/src/Views/libariandashboard.php?status=error");
                 }
                 exit;
 
             } else {
-                header("Location: /Mini-Library/src/Includes/addbook.php?status=empty");
+                header("Location: /Mini-Library/src/Views/libariandashboard.php?status=empty");
                 exit;
             }
         }
@@ -61,6 +77,6 @@ class BookController
 }
 
 if (isset($_POST['save_book'])) {
-    $bookController = new BookController();
-    $bookController->formSubmit();
+    $controller = new InsertBookController();
+    $controller->formSubmit();
 }
