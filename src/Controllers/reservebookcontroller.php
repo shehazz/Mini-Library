@@ -15,34 +15,44 @@ class ReserveController
     }
 
     public function handlePostRequest()
-{
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_reservation'])) {
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_reservation'])) {
 
-        if (!isset($_SESSION['nic']) || empty($_SESSION['nic'])) {
-            echo "<script>
+            if (!isset($_SESSION['nic']) || empty($_SESSION['nic'])) {
+                echo "<script>
                 alert('Session Error: No user found. Please log in again.');
                 window.location.href='login.php'; 
             </script>";
-            exit();
-        }
+                exit();
+            }
 
-        $isbn = $_POST['isbn'] ?? null;
-        $nic = $_SESSION['nic'];
-        $dueDate = date('Y-m-d', strtotime('+14 days'));
+            $isbn = $_POST['isbn'] ?? null;
+            $nic = $_SESSION['nic'];
+            $dueDate = date('Y-m-d', strtotime('+14 days'));
 
-        if (!$isbn) {
-            echo "<script>alert('Error: Missing ISBN data.');</script>";
-            return;
-        }
+            if (!$isbn) {
+                echo "<script>alert('Error: Missing ISBN data.');</script>";
+                return;
+            }
 
-        if ($this->bookModel->reserveBook($nic, $isbn, $dueDate)) {
-            header("Location: bookview.php?isbn=$isbn&status=success");
-            exit();
-        } else {
-            echo "<script>alert('Database Error: Check if you already have this book.');</script>";
+            if ($this->bookModel->reserveBook($nic, $isbn, $dueDate)) {
+                header("Location: bookview.php?isbn=$isbn&status=success");
+                exit();
+            } else {
+                echo "<script>alert('Database Error: Check if you already have this book.');</script>";
+            }
+
+            if ($this->bookModel->reserveBook($nic, $isbn, $dueDate)) {
+
+                header("Location: bookview.php?isbn=$isbn&reservation=success");
+                exit();
+            } else {
+
+                header("Location: bookview.php?isbn=$isbn&reservation=failed");
+                exit();
+            }
         }
     }
-}
 
     public function getReservationData()
     {
@@ -54,11 +64,9 @@ class ReserveController
         if (!$book)
             die("Error: Book not found.");
 
-        // Ensure category exists for the view
         if (!isset($book['category']))
             $book['category'] = "General";
 
-        // Calculations
         $book['bookprice'] = $book['bookprice'] ?? 0.00;
         $book['fineamount'] = $book['bookprice'] * 0.05;
         $book['dailyrate'] = 5;
@@ -69,6 +77,7 @@ class ReserveController
 }
 
 $resController = new ReserveController();
-$resController->handlePostRequest(); // Logic to save
-$data = $resController->getReservationData(); // Logic to display
+$resController->handlePostRequest();
+$data = $resController->getReservationData();
 extract($data);
+

@@ -33,17 +33,40 @@ class BookModel extends DBConnection
     {
         $conn = $this->getConnection();
 
-        $returndate = '';
-        $fineamount = '0.00';
-        $paymentstatus = 'Pending';
+        $conn->begin_transaction();
 
-        $sql = "INSERT INTO borrowdetails (nic, isbn, duedate, returndate, fineamount, paymentstatus) 
-            VALUES (?, ?, ?, ?, ?, ?)";
+        try {
+            $returndate = '';
+            $fineamount = '0.00';
+            $paymentstatus = 'Pending';
+            $sql1 = "INSERT INTO borrowdetails (nic, isbn, duedate, returndate, fineamount, paymentstatus) 
+                 VALUES (?, ?, ?, ?, ?, ?)";
+            $stmt1 = $conn->prepare($sql1);
+            $stmt1->bind_param("ssssss", $nic, $isbn, $dueDate, $returndate, $fineamount, $paymentstatus);
+            $stmt1->execute();
 
-        $stmt = $conn->prepare($sql);
+            $sql2 = "UPDATE book SET bookquantity = bookquantity - 1 WHERE isbn = ? AND bookquantity > 0";
+            $stmt2 = $conn->prepare($sql2);
+            $stmt2->bind_param("s", $isbn);
+            $stmt2->execute();
 
-        $stmt->bind_param("ssssss", $nic, $isbn, $dueDate, $returndate, $fineamount, $paymentstatus);
+            if ($stmt2->affected_rows === 0) {
+                throw new Exception("Book out of stock");
+            }
 
-        return $stmt->execute();
+            $sql3 = "UPDATE bookcopies SET availability = 'Reserved' 
+                 WHERE isbn = ? AND availability = 'Available' LIMIT 1";
+            $stmt3 = $conn->prepare($sql3);
+            $stmt3->bind_param("s", $isbn);
+            $stmt3->execute();
+
+            $conn->commit();
+            return true;
+
+        } catch (Exception $e) {
+
+            $conn->rollback();
+            return false;
+        }
     }
 }
