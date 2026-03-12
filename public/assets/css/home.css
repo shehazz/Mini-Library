@@ -26,7 +26,11 @@
 }
 
 #card:hover {
-    background: var(--main-light);
-    color: var(--card);
+    background: var(--border);
     transform: scale(1.1);
+}
+
+#borrowbtn {
+    background: var(--accent);
+    color: var(--bg);
 }
