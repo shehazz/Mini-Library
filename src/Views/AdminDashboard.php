@@ -51,8 +51,6 @@ $result = mysqli_query($conn, $sql);
                 </div>
 
             </header>
-
-            <!-- <div class="row g-4 mb-4">
                 <div class="col-12 col-sm-6 col-xl-3">
                     <div class="card border-0 border-start border-primary border-4 shadow-sm h-100 bg-white">
                         <div class="card-body p-4">
