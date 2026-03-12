@@ -1,21 +1,21 @@
 <?php
 
-require_once  '/../../Config/DBConnection.php';
+require_once '../../Config/DBConnection.php';
 
-class MemberModel {
-    private $conn;
+class AddUserModel extends DBConnection{
+    
 
     public function __construct() {
         global $conn;
         $this->conn = $conn;
     }
 
-    public function addMember($name, $nic, $email, $username, $password, $roleid, $profilepic) {
+    public function addMember($name, $nic, $email, $username, $password, $profilepic) {
         $stmt = $this->conn->prepare(
-            "INSERT INTO members (name, nic, email, username, password, roleid, profilepic)
-             VALUES (?, ?, ?, ?, ?, ?, ?)"
+            "INSERT INTO members (name, nic, email, username, password, profilepic)
+             VALUES (?, ?, ?, ?, ?, ?)"
         );
-        $stmt->bind_param("sssssss", $name, $nic, $email, $username, $password, $roleid, $profilepic);
+        $stmt->bind_param("ssssss", $name, $nic, $email, $username, $password, $profilepic);
         return $stmt->execute();
     }
 }

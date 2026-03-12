@@ -12,7 +12,7 @@ class BookController
         $this->bookModel = new BookModel();
     }
 
-    // send all form data to BookModel
+    
     public function formSubmit()
     {
         if (isset($_POST['bookname']) && isset($_POST['isbn']) && isset($_POST['category']) && isset($_POST['author'])) {
