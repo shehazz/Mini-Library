@@ -47,7 +47,7 @@ $result = mysqli_query($conn, $sql);
                     <h2 class="h4 mb-0  fw-bold">
                         <i class="bi bi-speedometer2 me-2"></i>Welcome Admin
                     </h2>
-                    <small class="text-muted">MiniLibrary Management System</small>
+                    <small class="text-muted">Management System</small>
                 </div>
 
             </header>
