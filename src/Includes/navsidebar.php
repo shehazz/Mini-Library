@@ -20,11 +20,11 @@
             <ul class="nav-list d-flex flex-column">
                 <li class="rounded-4" id="toggle-btn"><a href="#"><i class="bi bi-list"></i></a></li>
                 <li class="rounded-4"><a href="../Views/home.php"><i class="bi bi-house-door-fill"></i><span class="sidebtn">Home</span></a></li>
-                <li class="rounded-4"><a href="../Views/libariandashboard.php"><i class="bi bi-ui-checks-grid"></i><span class="sidebtn">Dashboard</span></a></li>
+                <li class="rounded-4"><a href="../Views/AdminDashboard.php"><i class="bi bi-ui-checks-grid"></i><span class="sidebtn">Dashboard</span></a></li>
                 <li class="rounded-4"><a href="../Views/rollpromotion.php"><i class="bi bi-person-vcard-fill"></i><span class="sidebtn">Manage Roles</span></a></li>
                 <li class="rounded-4"><a href="#"><i class="bi bi-people-fill"></i><span class="sidebtn">Manage Members</span></a></li>
                 <li class="rounded-4"><a href="#"><i class="bi bi-journal-plus"></i><span class="sidebtn">Manage Books</span></a></li>
-                <li class="rounded-4"><a href="#"><i class="bi bi-journal-plus"></i><span class="sidebtn">Reserved Books</span></a></li>
+                <li class="rounded-4"><a href="../Views/MemberReservedbook.php"><i class="bi bi-journal-plus"></i><span class="sidebtn">Reserved Books</span></a></li>
                 <li class="rounded-4 align-items-start mb-auto"><a href="../Views/finesview.php"><i class="bi bi-cash-stack"></i><span class="sidebtn">Fines & Payments</span></a></li>
                 <li class="rounded-4 align-items-end mt-auto"><a href="#"><i class="bi bi-gear-fill"></i><span class="sidebtn">Settings</span></a></li>
                 <li class="rounded-4"><a href="#"><i class="bi bi-box-arrow-right"></i><span class="sidebtn">Logout</span></a></li>
@@ -41,20 +41,7 @@
                 <li class="rounded-4"><a href="#"><i class="bi bi-box-arrow-right"></i><span class="sidebtn">Logout</span></a></li>
             </ul>
 
-<<<<<<< HEAD
         <?php elseif ($_SESSION['roleid'] == 3): ?>
-=======
-                <ul class="nav-list d-flex flex-column">
-                    <li class="rounded-4"><a href="../Views/home.php"><i class="bi bi-house-door-fill"></i><span class="sidebtn">Home</span></a></li>
-                    <li class="rounded-4"><a href="../Views/libariandashboard.php"><i class="bi bi-ui-checks-grid"></i><span class="sidebtn">Dashboard</span></a></li>
-                    <li class="rounded-4"><a href="../Views/rollpromotion.php"><i class="bi bi-person-vcard-fill"></i><span class="sidebtn">Manage Roles</span></a></li>
-                    <li class="rounded-4"><a href="#"><i class="bi bi-people-fill"></i><span class="sidebtn">Manage Members</span></a></li>
-                    <li class="rounded-4"><a href="#"><span class="sidebtn">Manage Books</span></a></li>
-                    <li class="rounded-4 align-items-start mb-auto"><a href="#"><i class="bi bi-cash-stack"></i><span class="sidebtn">Fines & Payments</span></a></li>
-                    <li class="rounded-4 align-items-end mt-auto"><a href="#"><i class="bi bi-gear-fill"></i><span class="sidebtn">Settings</span></a></li>
-                    <li class="rounded-4"><a href="#"><i class="bi bi-box-arrow-right"></i><span class="sidebtn">Logout</span></a></li>
-                </ul>
->>>>>>> 7f1600e (Refactor controllers/views; update dashboard UI)
 
             <ul class="nav-list d-flex flex-column">
                 <li class="rounded-4 active"><a href="src/Views/libariandashboard.php"><i class="bi bi-ui-checks-grid"></i><span class="button">Home</span></a></li>
@@ -63,18 +50,7 @@
                 <li class="rounded-4"><a href="#"><i class="bi bi-box-arrow-right"></i><span class="sidebtn">Logout</span></a></li>
             </ul>
 
-<<<<<<< HEAD
         <?php elseif ($_SESSION['roleid'] == 4): ?>
-=======
-                <ul class="nav-list d-flex flex-column">
-                    <li class="rounded-4"><a href="../Views/libariandashboard.php"><i class="bi bi-ui-checks-grid"></i><span class="button">Dashboard</span></a></li>
-                    <li class="rounded-4"><a href="#"><i class="bi bi-people-fill"></i><span class="button">Manage Members</span></a></li>
-                    <li class="rounded-4"><a href="#"><i class="bi bi-people-fill"></i><span class="sidebtn">Manage Books</span></a></li>
-                    <li class="rounded-4 align-items-start mb-auto"><a href="#"><i class="bi bi-cash-stack"></i><span class="sidebtn">Fines & Payments</span></a></li>
-                    <li class="rounded-4 align-items-end mt-auto"><a href="#"><i class="bi bi-gear-fill"></i><span class="sidebtn">Settings</span></a></li>
-                    <li class="rounded-4"><a href="#"><i class="bi bi-box-arrow-right"></i><span class="sidebtn">Logout</span></a></li>
-                </ul>
->>>>>>> 7f1600e (Refactor controllers/views; update dashboard UI)
 
             <ul class="nav-list d-flex flex-column">
                 <li class="rounded-4 active"><a href="src/Views/libariandashboard.php"><i class="bi bi-ui-checks-grid"></i><span class="button">Home</span></a></li>

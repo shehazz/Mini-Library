@@ -22,8 +22,6 @@
 
             <main class="flex-grow-1" style="overflow-y: auto;">
 
-
-
             <?php
 
             require_once '../../Config/DBConnection.php';
@@ -31,7 +29,7 @@
             $db = new DBConnection();
             $conn = $db->getConnection();
 
-            $query = "SELECT b.bookname, b.author, b.isbn, b.category, b.description, 
+            $query = "SELECT b.bookname, b.author, b.isbn, b.categoryid, b.description, 
           (SELECT COUNT(*) FROM bookcopies bc 
            WHERE bc.isbn = b.isbn AND bc.availability = 'Available') as available_count
           FROM book b 

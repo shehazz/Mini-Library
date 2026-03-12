@@ -59,7 +59,7 @@
 
                             <div class="row justify-content-center align-items-center">
 
-                                <div class="col-4 my-4">
+                                <div class="col-4">
                                     <div class="d-grid mb-2">
                                         <button type="submit" name="admin-login" class="button fs-6 p-2 justify-content-center shadow-sm rounded-5">
                                             Sign In
@@ -67,7 +67,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row justify-content-center align-items-center">
+                                <div class="row m-4 justify-content-center align-items-center">
                                     <div class="col-auto">
                                         Don't have an account ?
                                         <a href="src/Views/register.php" class="fs-6">
