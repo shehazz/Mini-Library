@@ -47,12 +47,10 @@ $result = mysqli_query($conn, $sql);
                     <h2 class="h4 mb-0  fw-bold">
                         <i class="bi bi-speedometer2 me-2"></i>Welcome Admin
                     </h2>
-                    <small class="text-muted">MiniLibrary Management System</small>
+                    <small class="text-muted">Management System</small>
                 </div>
 
             </header>
-
-            <!-- <div class="row g-4 mb-4">
                 <div class="col-12 col-sm-6 col-xl-3">
                     <div class="card border-0 border-start border-primary border-4 shadow-sm h-100 bg-white">
                         <div class="card-body p-4">
