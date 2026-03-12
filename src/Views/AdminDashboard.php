@@ -49,72 +49,8 @@ $result = mysqli_query($conn, $sql);
                     </h2>
                     <small class="text-muted">Management System</small>
                 </div>
-
             </header>
-                <div class="col-12 col-sm-6 col-xl-3">
-                    <div class="card border-0 border-start border-primary border-4 shadow-sm h-100 bg-white">
-                        <div class="card-body p-4">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div>
-                                    <h6 class="text-uppercase fw-bold text-muted small mb-2">Total Users</h6>
-                                    <h2 class="display-6 fw-bold mb-0 text-dark">2</h2>
-                                </div>
-                                <div class="rounded-circle bg-primary bg-opacity-10 p-3 d-flex align-items-center justify-content-center">
-                                    <i class="bi bi-people-fill fs-3 text-primary"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-12 col-sm-6 col-xl-3">
-                    <div class="card border-0 border-start border-danger border-4 shadow-sm h-100 bg-white">
-                        <div class="card-body p-4">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div>
-                                    <h6 class="text-uppercase fw-bold text-muted small mb-2">Admins</h6>
-                                    <h2 class="display-6 fw-bold mb-0 text-dark">1</h2>
-                                </div>
-                                <div class="rounded-circle bg-danger bg-opacity-10 p-3 d-flex align-items-center justify-content-center">
-                                    <i class="bi bi-person-badge-fill fs-3 text-danger"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-xl-3">
-                    <div class="card border-0 border-start border-success border-4 shadow-sm h-100 bg-white">
-                        <div class="card-body p-4">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div>
-                                    <h6 class="text-uppercase fw-bold text-muted small mb-2">Librarians</h6>
-                                    <h2 class="display-6 fw-bold mb-0 text-dark">1</h2>
-                                </div>
-                                <div class="rounded-circle bg-success bg-opacity-10 p-3 d-flex align-items-center justify-content-center">
-                                    <i class="bi bi-journal-bookmark fs-3 text-success"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-xl-3">
-                    <div class="card border-0 border-start border-info border-4 shadow-sm h-100 bg-white">
-                        <div class="card-body p-4">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div>
-                                    <h6 class="text-uppercase fw-bold text-muted small mb-2">Members</h6>
-                                    <h2 class="display-6 fw-bold mb-0 text-dark">0</h2>
-                                </div>
-                                <div class="rounded-circle bg-info bg-opacity-10 p-3 d-flex align-items-center justify-content-center">
-                                    <i class="bi bi-person-check fs-3 text-info"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
             <div class="row g-3 mb-4">
                 <div class="col-md-3">
                     <div class="card stat-card p-3 shadow-sm delay-1">
@@ -195,35 +131,46 @@ $result = mysqli_query($conn, $sql);
                     </div>
                 </div>
                 <div class="col-md-3">
-                        <div class="card stat-card p-3 shadow-sm delay-3">
-                            <div class="d-flex align-items-center">
-                                <div class="p-3 rounded-3 me-3" style="background-color: #FEE2E2;">
-                                    <i class="bi bi-exclamation-triangle text-danger" style="font-size: 1.5rem;"></i>
-                                </div>
-                                <div>
-                                    <p class="text-muted small mb-0">Overdue</p>
-                                    <h4 class="fw-bold mb-0 text-danger">24</h4>
-                                </div>
+                    <div class="card stat-card p-3 shadow-sm delay-3">
+                        <div class="d-flex align-items-center">
+                            <div class="p-3 rounded-3 me-3" style="background-color: #FEE2E2;">
+                                <i class="bi bi-exclamation-triangle text-danger" style="font-size: 1.5rem;"></i>
+                            </div>
+                            <div>
+                                <p class="text-muted small mb-0">Overdue</p>
+                                <h4 class="fw-bold mb-0 text-danger">24</h4>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="card border-0 shadow-sm p-4" style="border-radius: 12px; background-color: #fff;">
+                <div class="card border-0 shadow-sm p-4" style="border-radius: 12px; background-color: #fff;">
                     <h5 class="fw-bold mb-3" style="color: var(--main-dark);">Quick Actions</h5>
-                    <ul class="nav nav-tabs border-0 mb-2" id="quickActionTabs" role="tablist" style="border-bottom: 1px solid #E2E8F0 !important;">
-                        <li class="nav-item"><button class="nav-link active custom-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button">Overview</button></li>
-                        <li class="nav-item"><button class="nav-link custom-tab" data-bs-toggle="tab" data-bs-target="#add-book" type="button">Add New Book</button></li>
-                        <li class="nav-item"><button class="nav-link custom-tab" data-bs-toggle="tab" data-bs-target="#register" type="button">Register User</button></li>
-                        <li class="nav-item"><button class="nav-link custom-tab" data-bs-toggle="tab" data-bs-target="#issuebook" type="button">Reserve Book</button></li>
-                        <li class="nav-item"><button class="nav-link custom-tab" data-bs-toggle="tab" data-bs-target="#returnbook" type="button">Return Book</button></li>
+                    <ul class="nav nav-tabs border-0 mb-2" id="quickActionTabs" role="tablist"
+                        style="border-bottom: 1px solid #E2E8F0 !important;">
+                        <li class="nav-item"><button class="nav-link active custom-tab" data-bs-toggle="tab"
+                                data-bs-target="#overview" type="button">Overview</button></li>
+                        <li class="nav-item"><button class="nav-link custom-tab" data-bs-toggle="tab"
+                                data-bs-target="#add-book" type="button">Add New Book</button></li>
+                        <li class="nav-item"><button class="nav-link custom-tab" data-bs-toggle="tab"
+                                data-bs-target="#register" type="button">Register User</button></li>
+                        <li class="nav-item"><button class="nav-link custom-tab" data-bs-toggle="tab"
+                                data-bs-target="#issuebook" type="button">Reserve Book</button></li>
+                        <li class="nav-item"><button class="nav-link custom-tab" data-bs-toggle="tab"
+                                data-bs-target="#returnbook" type="button">Return Book</button></li>
                     </ul>
 
                     <div class="tab-content pt-3" id="quickActionContent">
-                        <div class="tab-pane fade show active" id="overview" role="tabpanel"><?php include '../Includes/overduetable.php'; ?></div>
-                        <div class="tab-pane fade" id="add-book" role="tabpanel"><?php include '../Includes/addbook.php'; ?></div>
-                        <div class="tab-pane fade" id="register" role="tabpanel"><?php include '../Views/registerstudent.php'; ?></div>
-                        <div class="tab-pane fade" id="issuebook" role="tabpanel"><?php include '../Views/reservebook.php'; ?></div>
-                        <div class="tab-pane fade" id="returnbook" role="tabpanel"><?php include '../Includes/returnbook.php'; ?></div>
+                        <div class="tab-pane fade show active" id="overview" role="tabpanel">
+                            <?php include '../Includes/overduetable.php'; ?></div>
+                        <div class="tab-pane fade" id="add-book" role="tabpanel">
+                            <?php include '../Includes/addbook.php'; ?></div>
+                        <div class="tab-pane fade" id="register" role="tabpanel">
+                            <?php include '../Views/registerstudent.php'; ?></div>
+                        <div class="tab-pane fade" id="issuebook" role="tabpanel">
+                            <?php include '../Views/reservebook.php'; ?></div>
+                        <div class="tab-pane fade" id="returnbook" role="tabpanel">
+                            <?php include '../Includes/returnbook.php'; ?></div>
                     </div>
                 </div>
 
