@@ -10,42 +10,48 @@ class ReserveController {
         $this->bookModel = new BookModel();
     }
 
-    public function getReservationData() {
-        $isbn = $_GET['isbn'] ?? $_POST['isbn'] ?? null;
-        if (!$isbn) die("Error: No ISBN provided.");
-
-        $book = $this->bookModel->getBookByIsbn($isbn);
-        if (!$book) die("Error: Book not found.");
- 
-        $book['bookprice'] = $book['bookprice'] ?? 20.00;
-        $book['dailyrate'] = 5; 
-        $book['fineamount'] = $book['bookprice'] * ($book['dailyrate'] / 100);
-        $book['coverimg'] = "coverimg/" . $book['coverimg'];
-
-        return $book;
-    }
-
     public function handlePostRequest() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_reservation'])) {
-            
-            $isbn = $_POST['isbn'];
-            // Use the NIC from your session or a form input
-            $nic = $_SESSION['nic'] ?? '000000000000'; 
-            
-            // Due date is 14 days from today
-            $dueDate = date('Y-m-d', strtotime('+14 days'));
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_reservation'])) {
+        $isbn = $_POST['isbn'] ?? null;
+        
+        if (!isset($_SESSION['nic'])) {
+            echo "<script>alert('Error: You must be logged in to reserve a book.'); window.location.href='login.php';</script>";
+            exit();
+        }
 
-            if ($this->bookModel->reserveBook($nic, $isbn, $dueDate)) {
-                header("Location: ../Views/bookview.php?isbn=$isbn&status=reserved");
-                exit();
-            } else {
-                echo "Database Error: Could not record borrowing details.";
-            }
+        $nic = $_SESSION['nic']; 
+        $dueDate = date('Y-m-d', strtotime('+14 days'));
+
+        if($this->bookModel->reserveBook($nic, $isbn, $dueDate)) {
+            header("Location: bookview.php?isbn=$isbn&status=success");
+            exit();
+        } else {
+            echo "<script>alert('Failed to reserve. Ensure the NIC and ISBN are valid.');</script>";
         }
     }
 }
 
+    public function getReservationData() {
+        $isbn = $_REQUEST['isbn'] ?? null;
+        if (!$isbn) die("Error: No ISBN provided.");
+
+        $book = $this->bookModel->getBookByIsbn($isbn);
+        if (!$book) die("Error: Book not found.");
+
+        // Ensure category exists for the view
+        if(!isset($book['category'])) $book['category'] = "General";
+
+        // Calculations
+        $book['bookprice'] = $book['bookprice'] ?? 0.00;
+        $book['fineamount'] = $book['bookprice'] * 0.05;
+        $book['dailyrate'] = 5;
+        $book['coverimg'] = "../../public/assets/images/coverimg/" . ($book['coverimg'] ?? 'default.jpg');
+        
+        return $book;
+    }
+}
+
 $resController = new ReserveController();
-$resController->handlePostRequest();
-$data = $resController->getReservationData();
+$resController->handlePostRequest(); // Logic to save
+$data = $resController->getReservationData(); // Logic to display
 extract($data);
