@@ -33,7 +33,7 @@
         <?php elseif ($_SESSION['roleid'] == 2): ?>
 
             <ul class="nav-list d-flex flex-column">
-                <li class="rounded-4"><a href="src/Views/libariandashboard.php"><i class="bi bi-ui-checks-grid"></i><span class="button">Dashboard</span></a></li>
+                <li class="rounded-4"><a href="../Views/libariandashboard.php"><i class="bi bi-ui-checks-grid"></i><span class="button">Dashboard</span></a></li>
                 <li class="rounded-4"><a href="#"><i class="bi bi-people-fill"></i><span class="button">Manage Members</span></a></li>
                 <li class="rounded-4"><a href="#"><i class="bi bi-people-fill"></i><span class="sidebtn">Manage Books</span></a></li>
                 <li class="rounded-4 align-items-start mb-auto"><a href="#"><i class="bi bi-cash-stack"></i><span class="sidebtn">Fines & Payments</span></a></li>
