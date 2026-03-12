@@ -1,5 +1,10 @@
 <?php
-include '../Controllers/reservebookcontroller.php';
+
+session_start();
+$_SESSION['nic'] = '200513433433';
+include '../Controllers/reservebookcontroller.php'; 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +40,7 @@ include '../Controllers/reservebookcontroller.php';
                         <div class="row g-0 mb-1 align-items-center">
                             <div class="col-auto text1 vertical-line">Category</div>
                             <div class="col-auto px-2 text1">:</div>
-                            <div class="col text2 ps-1"><?php echo $category ?? 'General'; ?></div>
+                            <div class="col text2 ps-1"><?php echo $category; ?></div>
                         </div>
                     </div>
 

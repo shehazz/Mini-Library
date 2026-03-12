@@ -11,7 +11,7 @@ class BookController {
 
     public function showBookDetails() {
        
-        $isbn = $_GET['isbn'] ?? $_POST['isbn'] ?? null;
+        $isbn = $_REQUEST['isbn'] ?? null;
 
         if ($isbn) {
             return $this->bookModel->getBookByIsbn($isbn);
