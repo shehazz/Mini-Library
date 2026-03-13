@@ -48,17 +48,6 @@ class InsertBookController
                     $bookquantity
                 );
 
-                $result = $this->bookModel->insertBook(
-                    $bookname,
-                    $isbn,
-                    $category,
-                    $author,
-                    $imgData,
-                    $bookprice,
-                    $description,
-                    $bookquantity
-                );
-
                 if ($result === 'duplicate') {
                     header("Location: /Mini-Library/src/Views/libariandashboard.php?status=duplicate");
                 } else if ($result) {

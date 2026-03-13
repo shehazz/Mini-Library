@@ -45,7 +45,7 @@ class InsertBookModel
     $check->execute();
     $result = $check->get_result();
 
-    if ($result->num_rows > 0) {
+    if ($result->num_rows > 1) {
         $check->close();
         return 'duplicate';
     }
