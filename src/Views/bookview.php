@@ -29,7 +29,11 @@ include '../Controllers/bookviewcontroller.php';
                     <div class="card-body bg-white text-center">
                         <a href="../Views/reservebook.php?isbn=<?php echo urlencode($book['isbn']); ?>"
                             class="text-decoration-none">
-                            <button class="borrowbtn rounded-pill">BORROW</button>
+                            <?php if ($book['bookquantity'] > 0): ?>
+                                <button class="borrowbtn rounded-pill">BORROW</button>
+                            <?php else: ?>
+                                <button class="stockout rounded-pill" disabled>OUT OF STOCK</button>
+                            <?php endif; ?>
                         </a>
                     </div>
                 </div>
@@ -38,7 +42,8 @@ include '../Controllers/bookviewcontroller.php';
             <div class="col-md-8 col-lg-9 pt-md-5 mt-md-5">
                 <div class="ps-md-4">
                     <h1 class="fw-bold bname mb-1"><?php echo htmlspecialchars($book['bookname']); ?></h1>
-                    <p class="fs-5 text2 mb-2">by <span class="text2"><?php echo htmlspecialchars($book['author']); ?></span></p>
+                    <p class="fs-5 text2 mb-2">by <span
+                            class="text2"><?php echo htmlspecialchars($book['author']); ?></span></p>
                     <div>
                         <div class="row g-0 mb-1 align-items-center">
                             <div class="col-auto text1 vertical-line">ISBN</div>

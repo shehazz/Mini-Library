@@ -20,7 +20,7 @@
 
         <?php include '../Includes/navbar.php' ?>
 
-            <main class="flex-grow-1" style="overflow-y: auto;">
+        <main class="flex-grow-1" style="overflow-y: auto;">
 
             <?php
 
@@ -50,9 +50,19 @@
 
 
                                         <?php if ($book['available_count'] > 0): ?>
-                                            <button class="btn btn-sm btn-success">Borrow</button>
+                                            <div class="">
+                                                <span class="badge bg-success">Available</span>
+                                            </div>
+                                            <div class="d-flex justify-content-center align-items-center w-auto mt-5">
+                                                <button class="btn btn-sm px-5 py-2 rounded-4" id="borrowbtn">Borrow</button>
+                                            </div>
                                         <?php else: ?>
-                                            <span class="badge bg-danger">Issued</span>
+                                            <div class="">
+                                                <span class="badge bg-danger">Issued</span>
+                                            </div>
+                                            <div class="d-flex justify-content-center align-items-center w-auto mt-5">
+                                                <button class="btn btn-sm px-5 py-2 rounded-4" id="borrowbtn" disabled>Borrow</button>
+                                            </div>
                                         <?php endif; ?>
                                     </div>
                                 </div>

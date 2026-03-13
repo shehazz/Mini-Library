@@ -30,6 +30,16 @@
     margin-top: -70px;
 }
 
+.stockout {
+    background-color: var(--text-muted);
+    border: none;
+    font-weight: bold;
+    color: white;
+    transition: 0.3s;
+    padding: 10px 25px;
+    width: 100%;
+}
+
 .borrowbtn {
     background-color: var(--main-light);
     border: none;
