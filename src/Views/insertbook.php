@@ -26,8 +26,8 @@
             </div>
 
             <div class="card-body p-4">
-                <form action="/Mini-Library/src/Controllers/InsertBookController.php" method="POST" enctype="multipart/form-data"
-                    onsubmit="return validate()">
+                <form action="/Mini-Library/src/Controllers/InsertBookController.php" method="POST"
+                    enctype="multipart/form-data" onsubmit="return validate()">
                     <div class="row g-4">
 
                         <div class="col-md-6">
@@ -84,8 +84,8 @@
 
                         <div class="col-md-12">
                             <label class="form-label small fw-bold text-muted">DESCRIPTION / SUMMARY</label>
-                            <textarea name="description" class="form-control bg-light border-0 p-2 shadow-none"
-                                rows="3" onblur="validate()" oninput="validate()"></textarea>
+                            <textarea name="description" class="form-control bg-light border-0 p-2 shadow-none" rows="3"
+                                onblur="validate()" oninput="validate()"></textarea>
                             <span id="descriptionErr" class="text-danger small"></span>
                         </div>
 
@@ -122,7 +122,7 @@
 
     <!-- SweetAlert2 status popups -->
     <?php
-        $status = $_GET['status'] ?? '';
+    $status = $_GET['status'] ?? '';
     ?>
     <script>
         const status = "<?= htmlspecialchars($status) ?>";
@@ -151,8 +151,17 @@
                 confirmButtonColor: '#728C63',
                 confirmButtonText: 'OK'
             });
+        } else if (status === 'duplicate') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Duplicate ISBN!',
+                text: 'A book with this ISBN already exists in the library.',
+                confirmButtonColor: '#728C63',
+                confirmButtonText: 'OK'
+            });
         }
     </script>
 
 </body>
+
 </html>

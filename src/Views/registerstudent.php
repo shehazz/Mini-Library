@@ -38,8 +38,8 @@ $roles = $RollPromotionController->getAllRoles();
             <form action="../../src/Controllers/MemberController.php" method="POST">
                 <div class="row g-4">
                     <div class="col-md-6">
-                        <label class="form-label small fw-bold text-muted">MEMBER ID</label>
-                        <input type="text" name="member_id" class="form-control bg-light border-0 p-2 shadow-none"
+                        <label class="form-label small fw-bold text-muted">User Name</label>
+                        <input type="text" name="username" class="form-control bg-light border-0 p-2 shadow-none"
                             placeholder="e.g. LIB-2026-001" style="border-radius: 8px;" required>
                     </div>
 
