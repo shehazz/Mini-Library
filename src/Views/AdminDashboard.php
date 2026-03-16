@@ -23,11 +23,11 @@ $total_admins  = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as t FR
 $total_libs    = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as t FROM user WHERE roleid = 2"))['t'];
 $total_members = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as t FROM user WHERE roleid = 3"))['t'];
 $total_books   = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as t FROM book"))['t'];
-$total_borrowed= mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as t FROM borrowdetails WHERE returndate = '0000-00-00'"))['t'];
+$total_borrowed = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as t FROM borrowdetails WHERE returndate = '0000-00-00'"))['t'];
 $total_overdue = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as t FROM borrowdetails WHERE returndate = '0000-00-00' AND duedate < CURDATE()"))['t'];
 ?>
 
-<!DOCTYPE html>
+<!DOCTYPE html>ss
 
 <html lang="en">
 
@@ -61,7 +61,7 @@ $total_overdue = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as t FR
 
             <div class="row g-3 mb-4">
                 <div class="col-md-3">
-                    <div class="card stat-card p-3 shadow-sm delay-1">
+                    <div class="card stat-card p-3 shadow-sm delay-1 rounded-4">
                         <div class="d-flex align-items-center">
                             <div class="p-3 rounded-3 me-3" style="background-color: #F8FAF9;">
                                 <i class="bi bi-people-fill fs-3 "></i>
@@ -74,7 +74,7 @@ $total_overdue = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as t FR
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card stat-card p-3 shadow-sm delay-2">
+                    <div class="card stat-card p-3 shadow-sm delay-2 rounded-4">
                         <div class="d-flex align-items-center">
                             <div class="p-3 rounded-3 me-3" style="background-color: #F8FAF9;">
                                 <i class="bi bi-person-badge-fill fs-3 "></i>
@@ -87,7 +87,7 @@ $total_overdue = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as t FR
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card stat-card p-3 shadow-sm delay-3">
+                    <div class="card stat-card p-3 shadow-sm delay-3 rounded-4">
                         <div class="d-flex align-items-center">
                             <div class="p-3 rounded-3 me-3" style="background-color: #F8FAF9;">
                                 <i class="bi bi-journal-bookmark fs-3"></i>
@@ -100,7 +100,7 @@ $total_overdue = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as t FR
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card stat-card p-3 shadow-sm delay-4">
+                    <div class="card stat-card p-3 shadow-sm delay-4 rounded-4">
                         <div class="d-flex align-items-center">
                             <div class="p-3 rounded-3 me-3" style="background-color: #F8FAF9;">
                                 <i class="bi bi-person-check fs-3 text-info"></i>
@@ -113,7 +113,7 @@ $total_overdue = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as t FR
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card stat-card p-3 shadow-sm delay-1">
+                    <div class="card stat-card p-3 shadow-sm delay-1 rounded-4">
                         <div class="d-flex align-items-center">
                             <div class="p-3 rounded-3 me-3" style="background-color: #F8FAF9;">
                                 <i class="bi bi-book text-dark" style="font-size: 1.5rem;"></i>
@@ -126,7 +126,7 @@ $total_overdue = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as t FR
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card stat-card p-3 shadow-sm delay-2">
+                    <div class="card stat-card p-3 shadow-sm delay-2 rounded-4">
                         <div class="d-flex align-items-center">
                             <div class="p-3 rounded-3 me-3" style="background-color: #F8FAF9;">
                                 <i class="bi bi-journal-check text-dark" style="font-size: 1.5rem;"></i>
@@ -139,7 +139,7 @@ $total_overdue = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as t FR
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card stat-card p-3 shadow-sm delay-3">
+                    <div class="card stat-card p-3 shadow-sm delay-3 rounded-4">
                         <div class="d-flex align-items-center">
                             <div class="p-3 rounded-3 me-3" style="background-color: #FEE2E2;">
                                 <i class="bi bi-exclamation-triangle text-danger" style="font-size: 1.5rem;"></i>

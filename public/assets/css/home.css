@@ -18,7 +18,7 @@
 }
 
 #card {
-    background: var(--card);
+    background: transparent;
     border: none;
     outline: none;
     cursor: pointer;
@@ -26,11 +26,33 @@
 }
 
 #card:hover {
-    background: var(--border);
+    background: var(--border);   
     transform: scale(1.1);
 }
 
 #borrowbtn {
     background: var(--accent);
+    transition: transform 0.3s;
     color: var(--bg);
+    padding: 15px;
+}
+
+#borrowbtn:hover {
+    background: var(--main-dark);
+    color: var(--bg);
+    padding: 15px;
+    transform: scaleX(1.1);
+}
+
+#notavailablebtn {
+    background: var(--accent);
+    color: var(--bg);
+    padding: 15px;
+    cursor: not-allowed;
+}
+
+#notavailablebtn:hover {
+    background: var(--accent);
+    color: var(--bg);
+    padding: 15px;
 }
