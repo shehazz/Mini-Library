@@ -74,7 +74,7 @@ include '../Controllers/reservebookcontroller.php';
                     </div>
 
                     <div class="d-grid gap-2">
-                        <button type="submit" class="buttn1 btn-lg rounded-pill fw-bold text-light" id="confirmBtn" disabled>
+                        <button type="submit" class="buttn1 btn-lg rounded-pill fw-bold text-light" id="confirmBtn" name="add" disabled>
                             Confirm Reservation
                         </button>
                         <button type="button" class="buttn2 btn-lg rounded-pill fw-bold" onclick="window.history.back();">
