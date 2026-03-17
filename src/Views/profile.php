@@ -89,34 +89,6 @@ $user = $result->fetch_assoc();
                             </div>
                         </div>
 
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <div class="card border-0 shadow-sm rounded-4 p-3 bg-light">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon-box bg-white p-3 rounded-3 shadow-sm me-3">
-                                            <i class="bi bi-book text-primary fs-4"></i>
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-0 text-secondary">Borrowed</h6>
-                                            <span class="fw-bold fs-5">05 Books</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card border-0 shadow-sm rounded-4 p-3 bg-light">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon-box bg-white p-3 rounded-3 shadow-sm me-3">
-                                            <i class="bi bi-exclamation-triangle text-danger fs-4"></i>
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-0 text-secondary">Fine Due</h6>
-                                            <span class="fw-bold fs-5">Rs. 250.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

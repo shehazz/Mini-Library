@@ -32,7 +32,7 @@
 
 #borrowbtn {
     background: var(--accent);
-    transition: transform 0.3s;
+    transition: background 0.3s;
     color: var(--bg);
     padding: 15px;
 }
@@ -41,7 +41,6 @@
     background: var(--main-dark);
     color: var(--bg);
     padding: 15px;
-    transform: scaleX(1.1);
 }
 
 #notavailablebtn {
