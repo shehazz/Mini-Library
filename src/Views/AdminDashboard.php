@@ -27,7 +27,7 @@ $total_borrowed = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as t F
 $total_overdue = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as t FROM borrowdetails WHERE returndate = '0000-00-00' AND duedate < CURDATE()"))['t'];
 ?>
 
-<!DOCTYPE html>ss
+<!DOCTYPE html>
 
 <html lang="en">
 

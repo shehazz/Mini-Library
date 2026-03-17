@@ -80,7 +80,7 @@
                                 </a>
                             <?php else: ?>
                                 <div class="d-flex justify-content-center align-items-center w-auto">
-                                    <button class="btn btn-sm rounded-5 px-5" id="notavailablebtn">Not Available</button>
+                                    <button class="btn btn-sm rounded-5 px-5" id="notavailablebtn" disabled>Not Available</button>
                                 </div>
                             <?php endif; ?>
 

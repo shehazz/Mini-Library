@@ -92,9 +92,7 @@ $roles = $RollPromotionController->getAllRoles();
                 <div class="col-md-3 mt-3 mt-md-0">
                     <div class="input-group input-group-sm">
                         
-                            
-                        
-                        <input type="text" id="searchInput" class="form-control  ps-0 shadow-none border rounded-5 "
+                        <input type="text" id="searchInput" class="form-control ps-3 py-2 ps-0 shadow-none border rounded-5 "
                             placeholder="  Search records...">
                     </div>
                 </div>
