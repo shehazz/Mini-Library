@@ -13,6 +13,21 @@
     --border: #DCE4EC;
 }
 
+.bookcard {
+    background: var(--bg);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: transform 0.3s, background 0.3s cubic-bezier(0.19, 1, 0.22, 1), color 0.5s ease;
+    height: 250px;
+    width: 280px;
+}
+
+.bookcard:hover {
+    background: var(--border);   
+    transform: scale(1.1);
+}
+
 .bname {
     color: var(--main);
     font-weight: bold;
@@ -33,26 +48,26 @@
 .stockout {
     background-color: var(--text-muted);
     border: none;
-    font-weight: bold;
     color: white;
     transition: 0.3s;
     padding: 10px 25px;
-    width: 100%;
+    width: 200px;
 }
 
 .borrowbtn {
-    background-color: var(--main-light);
+    background-color: var(--accent);
     border: none;
-    font-weight: bold;
-    color: white;
-    transition: 0.3s;
+    color: var(--bg);
+    transition: transform 0.3s;
     padding: 10px 25px;
-    width: 100%;
+    width: 50%;
 }
 
 .borrowbtn:hover {
-    background-color: var(--main-dark);
-    color: white;
+    background: var(--main-dark);
+    color: var(--bg);
+    padding: 15px;
+    transform: scaleX(1.1);
 }
 
 .text1 {
