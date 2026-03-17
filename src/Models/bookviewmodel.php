@@ -20,11 +20,11 @@ class BookModel extends DBConnection
         return $result;
     }
 
-    public function getBooksByCategory($categoryId, $limit = 4)
+    public function getBooksByCategory($categoryId, $excludeIsbn, $limit = 4)
     {
         $conn = $this->getConnection();
-        $stmt = $conn->prepare("SELECT * FROM book WHERE categoryid = ? LIMIT ?");
-        $stmt->bind_param("ii", $categoryId, $limit);
+        $stmt = $conn->prepare("SELECT * FROM book WHERE categoryid = ? AND isbn != ? LIMIT ?");
+        $stmt->bind_param("isi", $categoryId, $excludeIsbn, $limit);
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }

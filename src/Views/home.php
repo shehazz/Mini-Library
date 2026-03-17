@@ -73,7 +73,7 @@
                             </a>
 
                             <?php if ($book['available_count'] > 0): ?>
-                                <a href="reservebook.php?isbn=<?php echo $book['isbn']; ?>" class="text-decoration-none">
+                                <a href="bookview.php?isbn=<?php echo $book['isbn']; ?>" class="text-decoration-none">
                                     <div class="d-flex justify-content-center align-items-center w-auto">
                                         <button class="btn btn-sm rounded-5 px-5" id="borrowbtn">Borrow</button>
                                     </div>

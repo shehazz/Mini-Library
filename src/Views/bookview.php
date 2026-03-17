@@ -22,17 +22,16 @@ include '../Controllers/bookviewcontroller.php';
     <div class="container overlap-content pb-5">
         <div class="row g-4">
             <div class="col-md-4 col-lg-3">
-                <div class="card shadow border-0 rounded-4 overflow-hidden">
+                <div class="bookcard shadow border-0 rounded-4 overflow-hidden">
 
                     <img src="coverimg/<?php echo $book['coverimg']; ?>" class="img-fluid" alt="Book Cover">
 
-                    <div class="card-body bg-white text-center">
-                        <a href="../Views/reservebook.php?isbn=<?php echo urlencode($book['isbn']); ?>"
-                            class="text-decoration-none">
+                    <div class="card-body text-center">
+                        <a href="../Views/reservebook.php?isbn=<?php echo urlencode($book['isbn']); ?>" class="text-decoration-none">
                             <?php if ($book['bookquantity'] > 0): ?>
-                                <button class="borrowbtn rounded-pill">BORROW</button>
+                                <button class="borrowbtn rounded-pill">Borrow</button>
                             <?php else: ?>
-                                <button class="stockout rounded-pill" disabled>OUT OF STOCK</button>
+                                <button class="stockout rounded-pill" disabled>Out of Stock</button>
                             <?php endif; ?>
                         </a>
                     </div>
@@ -76,15 +75,15 @@ include '../Controllers/bookviewcontroller.php';
                 </a>
             </div>
 
-            <div class="row row-cols-2 row-cols-md-4 g-4">
+            <div class="row row-cols-2 row-cols-md-4 g-5 ">
                 <?php for ($i = 0; $i < 4; $i++): ?>
                     <div class="col">
-                        <div class="card h-100 border-0 shadow-sm rounded-4 text-center p-3 bg-white">
+                        <div class="bookcard h-100 border-0 shadow-sm rounded-4 text-center p-3">
                             <img src="coverimg/<?php echo $book['coverimg']; ?>" class="img-fluid" alt="Book Cover"
                                 class="rounded-3">
                             <div class="card-body pt-0 text-center">
-                                <small class="d-block fw-bold mt-3 text1">Book Name</small>
-                                <small class="text-muted d-block mb-1 text2">Author Name</small>
+                                <small class="d-block fw-bold mt-3 text1"><?php echo htmlspecialchars($book['bookname']); ?></small>
+                                <small class="text-muted d-block mb-1 text2">by <?php echo htmlspecialchars($book['author']); ?></small>
                                 <a href="../Views/reservebook.php?isbn=<?php echo urlencode($book['isbn']); ?>"><button
                                         class="borrowbtn rounded-pill mt-2">Borrow</button></a>
                             </div>
