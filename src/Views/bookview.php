@@ -28,7 +28,7 @@ include '../Controllers/bookviewcontroller.php';
 
                     <div class="card-body text-center">
                         <a href="../Views/reservebook.php?isbn=<?php echo urlencode($book['isbn']); ?>" class="text-decoration-none">
-                            <?php if ($book['bookquantity'] > 0): ?>
+                            <?php if (($book['available_count'] ?? 0) > 0): ?>
                                 <button class="borrowbtn rounded-pill">Borrow</button>
                             <?php else: ?>
                                 <button class="stockout rounded-pill" disabled>Out of Stock</button>
