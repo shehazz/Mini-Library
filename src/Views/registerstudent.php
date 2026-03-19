@@ -35,7 +35,7 @@ $roles = $RollPromotionController->getAllRoles();
         </div>
 
         <div class="card-body p-4">
-            <form action="../../src/Controllers/MemberController.php" method="POST">
+            <form action="../../src/Controllers/UserController.php" method="POST">
                 <div class="row g-4">
                     <div class="col-md-6">
                         <label class="form-label small fw-bold text-muted">User Name</label>
