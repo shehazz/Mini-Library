@@ -71,21 +71,23 @@
                             <label class="form-label small fw-bold">Email</label>
                             <input type="email" name="email" class="form-control form-control-lg fs-6"
                                 placeholder="Enter your email address"
-                                oninput="email_validation()" required>
+                                oninput="email_validation()" onblur="email_validation()" required>
                             <span id="emailerror" class="small text-danger"></span>
                         </div>
 
-                        <div class="d-grid">
-                            <button type="submit" name="register" class="btn btn-primary btn-lg fs-6 shadow-sm">
-                                Sign Up
-                            </button>
+                        <div class="col">
+                            <div class="d-grid mb-2">
+                                <button type="submit" name="register" class="button fs-6 p-2 justify-content-center shadow-sm rounded-5">
+                                    Sign Up
+                                </button>
+                            </div>
                         </div>
 
-                        <div class="row m-5 justify-content-center align-items-center">
+                        <div class="row mt-4 justify-content-center align-items-center">
                             <div class="col-auto">
-                                Don't have an account ?
-                                <a href="src/Views/register.php" class="fs-6">
-                                    Create account
+                                Already have an Account ?
+                                <a href="../../index.php" class="fs-6">
+                                    Log in
                                 </a>
                             </div>
                         </div>

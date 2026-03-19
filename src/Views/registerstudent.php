@@ -26,15 +26,14 @@
                 </a>
             </div>
 
-            <div class="card-body p-4">
-                <form action="../Controllers/AddUserController.php" method="POST" enctype="multipart/form-data">
-                    <div class="row">
-                
-                        <div class="col-md-6 mb-4">
-                            <label class="form-label small fw-bold text-secondary text-uppercase" style="letter-spacing: 0.5px;">Full Name</label>
-                            <input type="text" name="name" class="form-control border-0 py-2 shadow-none" 
-                                   style="background-color: #f8f9fa;" placeholder="e.g. J.A. Thirundu" required>
-                        </div>
+        <div class="card-body p-4">
+            <form action="../../src/Controllers/MemberController.php" method="POST">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <label class="form-label small fw-bold text-muted">User Name</label>
+                        <input type="text" name="username" class="form-control bg-light border-0 p-2 shadow-none"
+                            placeholder="e.g. LIB-2026-001" style="border-radius: 8px;" required>
+                    </div>
 
                         <div class="col-md-6 mb-4">
                             <label class="form-label small fw-bold text-secondary text-uppercase" style="letter-spacing: 0.5px;">NIC Number</label>

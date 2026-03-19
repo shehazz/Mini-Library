@@ -1,47 +1,78 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 require_once '../Models/bookviewmodel.php';
 
-if (session_status() === PHP_SESSION_NONE) { session_start(); }
-
-class ReserveController {
+class ReserveController
+{
     private $bookModel;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->bookModel = new BookModel();
     }
 
-    public function getReservationData() {
-        $isbn = $_GET['isbn'] ?? $_POST['isbn'] ?? null;
-        if (!$isbn) die("Error: No ISBN provided.");
-
-        $book = $this->bookModel->getBookByIsbn($isbn);
-        if (!$book) die("Error: Book not found.");
- 
-        $book['bookprice'] = $book['bookprice'] ?? 20.00;
-        $book['dailyrate'] = 5; 
-        $book['fineamount'] = $book['bookprice'] * ($book['dailyrate'] / 100);
-        $book['coverimg'] = "coverimg/" . $book['coverimg'];
-
-        return $book;
-    }
-
-    public function handlePostRequest() {
+    public function handlePostRequest()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_reservation'])) {
-            
-            $isbn = $_POST['isbn'];
-            // Use the NIC from your session or a form input
-            $nic = $_SESSION['nic'] ?? '000000000000'; 
-            
-            // Due date is 14 days from today
+
+            if (!isset($_SESSION['nic']) || empty($_SESSION['nic'])) {
+                echo "<script>
+                alert('Session Error: No user found. Please log in again.');
+                window.location.href='login.php'; 
+            </script>";
+                exit();
+            }
+
+            $isbn = $_POST['isbn'] ?? null;
+            $nic = $_SESSION['nic'];
             $dueDate = date('Y-m-d', strtotime('+14 days'));
 
+            if (!$isbn) {
+                echo "<script>alert('Error: Missing ISBN data.');</script>";
+                return;
+            }
+
             if ($this->bookModel->reserveBook($nic, $isbn, $dueDate)) {
-                header("Location: ../Views/bookview.php?isbn=$isbn&status=reserved");
+                header("Location: bookview.php?isbn=$isbn&status=success");
                 exit();
             } else {
-                echo "Database Error: Could not record borrowing details.";
+                echo "<script>alert('Database Error: Check if you already have this book.');</script>";
+            }
+
+            if ($this->bookModel->reserveBook($nic, $isbn, $dueDate)) {
+
+                header("Location: bookview.php?isbn=$isbn&reservation=success");
+                exit();
+            } else {
+
+                header("Location: bookview.php?isbn=$isbn&reservation=failed");
+                exit();
             }
         }
+    }
+
+    public function getReservationData()
+    {
+        $isbn = $_REQUEST['isbn'] ?? null;
+        if (!$isbn)
+            die("Error: No ISBN provided.");
+
+        $book = $this->bookModel->getBookByIsbn($isbn);
+        if (!$book)
+            die("Error: Book not found.");
+
+        if (!isset($book['category']))
+            $book['category'] = "General";
+
+        $book['bookprice'] = $book['bookprice'] ?? 0.00;
+        $book['fineamount'] = $book['bookprice'] * 0.05;
+        $book['dailyrate'] = 5;
+        $book['coverimg'] = "../../public/assets/images/coverimg/" . ($book['coverimg'] ?? 'default.jpg');
+
+        return $book;
     }
 }
 
@@ -49,3 +80,4 @@ $resController = new ReserveController();
 $resController->handlePostRequest();
 $data = $resController->getReservationData();
 extract($data);
+

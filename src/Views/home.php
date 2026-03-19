@@ -20,7 +20,7 @@
 
         <?php include '../Includes/navbar.php' ?>
 
-            <main class="flex-grow-1" style="overflow-y: auto;">
+        <main class="flex-grow-1" style="overflow-y: auto;">
 
             <?php
 
@@ -29,39 +29,65 @@
             $db = new DBConnection();
             $conn = $db->getConnection();
 
-            $query = "SELECT b.bookname, b.author, b.isbn, b.categoryid, b.description, 
+            $query = "SELECT 
+            b.bookname,
+            b.author,
+            b.isbn,
+            b.categoryid,
+            b.description,
+            cat.category,
           (SELECT COUNT(*) FROM bookcopies bc 
            WHERE bc.isbn = b.isbn AND bc.availability = 'Available') as available_count
-          FROM book b 
+          FROM book b LEFT JOIN bookcategory cat ON b.categoryid = cat.category
           LIMIT 12";
             $result = $conn->query($query);
+
             ?>
 
             <div class="container mt-5">
                 <div class="row">
                     <?php while ($book = $result->fetch_assoc()): ?>
                         <div class="col-lg-3 col-md-6 col-sm-12 g-4">
-                            <a href="bookview.php?isbn=<?php echo $book['isbn']; ?>" class="text-decoration-none">
+
+                            <a href="bookview.php?isbn=<?php echo $book['isbn']; ?>" class="text-decoration-none text-dark">
                                 <div class="card h-100 shadow rounded-4" id="card">
                                     <div class="card-body">
-                                        <h5 class="card-title fw-bold"><?php echo $book['bookname']; ?></h5>
-                                        <h6 class="card-subtitle mb-2">by <?php echo $book['author']; ?></h6>
-                                        <p class="small">ISBN: <?php echo $book['isbn']; ?></p>
-
 
                                         <?php if ($book['available_count'] > 0): ?>
-                                            <button class="btn btn-sm btn-success">Borrow</button>
+                                            <div>
+                                                <span class="badge bg-success">Available</span>
+                                            </div>
                                         <?php else: ?>
-                                            <span class="badge bg-danger">Issued</span>
+                                            <div>
+                                                <span class="badge bg-danger">Issued</span>
+                                            </div>
                                         <?php endif; ?>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    <?php endwhile; ?>
 
+                                        <h5 class="card-title fw-bold"><?php echo $book['bookname']; ?></h5>
+                                        <h6 class="card-subtitle fw-bold mb-3">by <?php echo $book['author']; ?></h6>
+                                        <p>Category: <?php echo $book['category']; ?></p>
+                                        <p>ISBN: <?php echo $book['isbn']; ?></p>
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <hr class="w-75">
+                                        </div>
+                            </a>
+
+                            <?php if ($book['available_count'] > 0): ?>
+                                <a href="bookview.php?isbn=<?php echo $book['isbn']; ?>" class="text-decoration-none">
+                                    <div class="d-flex justify-content-center align-items-center w-auto">
+                                        <button class="btn btn-sm rounded-5 px-5" id="borrowbtn">Borrow</button>
+                                    </div>
+                                </a>
+                            <?php else: ?>
+                                <div class="d-flex justify-content-center align-items-center w-auto">
+                                    <button class="btn btn-sm rounded-5 px-5" id="notavailablebtn" disabled>Not Available</button>
+                                </div>
+                            <?php endif; ?>
+
+                        </div>
                 </div>
             </div>
+        <?php endwhile; ?>
 
 
         </main>

@@ -16,6 +16,7 @@
 .cover {
     background: var(--accent);
 }
+
 .button {
     background-color: var(--accent);
     color: var(--bg);

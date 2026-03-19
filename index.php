@@ -67,7 +67,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row m-4 justify-content-center align-items-center">
+                                <div class="row mt-4 justify-content-center align-items-center">
                                     <div class="col-auto">
                                         Don't have an account ?
                                         <a href="src/Views/register.php" class="fs-6">

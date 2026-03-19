@@ -4,11 +4,11 @@ require_once '../Models/RegisterModel.php';
 
 class RegisterController
 {
-    private $model;
+    private $registerModel;
 
     public function __construct()
     {
-        $this->model = new registerModel();
+        $this->registerModel = new registerModel();
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
@@ -26,7 +26,7 @@ class RegisterController
         $nic      = trim($_POST['nic']      ?? '');
         $email    = trim($_POST['email']    ?? '');
 
-        if ($this->model->registerUser($username, $password, $name, $nic, $email)) {
+        if ($this->registerModel->registerUser($username, $password, $name, $nic, $email)) {
             return ['success' => true, 'message' => 'Registration successful'];
         }
 

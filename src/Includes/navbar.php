@@ -23,7 +23,7 @@
 
             <div class="user-profile">
                 <a href="../Views/profile.php" class="text-dark">
-                    <h2 class="m-0"><i class="bi bi-person-circle"></i></h2>
+                    <h2 class="m-0"><i class="bi bi-person-fill"></i></h2>
                 </a>
             </div>
         </div>

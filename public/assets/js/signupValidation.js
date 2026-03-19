@@ -32,7 +32,7 @@ function username_validation() {
 function password_validation() {
     let password = document.registerform.password;
     let error = document.getElementById('passworderror');
-    // Pattern: Min 8 chars, 1 Upper, 1 Lower, 1 Number, 1 Special
+    
     let pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
     if (password.value === "") {
