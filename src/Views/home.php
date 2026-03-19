@@ -31,6 +31,7 @@
 
             $query = "SELECT 
             b.bookname,
+            b.coverimg,
             b.author,
             b.isbn,
             b.categoryid,
@@ -63,6 +64,8 @@
                                             </div>
                                         <?php endif; ?>
 
+                                        <img src="coverimg/<?php echo $book['coverimg']; ?>" class="img-fluid" alt="Book Cover"
+                                            class="rounded-3">
                                         <h5 class="card-title fw-bold"><?php echo $book['bookname']; ?></h5>
                                         <h6 class="card-subtitle fw-bold mb-3">by <?php echo $book['author']; ?></h6>
                                         <p>Category: <?php echo $book['category']; ?></p>
@@ -73,11 +76,11 @@
                             </a>
 
                             <?php if ($book['available_count'] > 0): ?>
-                                <a href="bookview.php?isbn=<?php echo $book['isbn']; ?>" class="text-decoration-none">
-                                    <div class="d-flex justify-content-center align-items-center w-auto">
+                                <div class="d-flex justify-content-center align-items-center w-auto">
+                                    <a href="reservebook.php?isbn=<?php echo $book['isbn']; ?>" class="text-decoration-none">
                                         <button class="btn btn-sm rounded-5 px-5" id="borrowbtn">Borrow</button>
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
                             <?php else: ?>
                                 <div class="d-flex justify-content-center align-items-center w-auto">
                                     <button class="btn btn-sm rounded-5 px-5" id="notavailablebtn" disabled>Not Available</button>
