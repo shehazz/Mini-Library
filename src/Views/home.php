@@ -24,25 +24,11 @@
 
             <?php
 
-            require_once '../../Config/DBConnection.php';
+            require_once '../Models/homemodel.php';
 
-            $db = new DBConnection();
-            $conn = $db->getConnection();
-
-            $query = "SELECT 
-            b.bookname,
-            b.coverimg,
-            b.author,
-            b.isbn,
-            b.categoryid,
-            b.description,
-            cat.category,
-          (SELECT COUNT(*) FROM bookcopies bc 
-           WHERE bc.isbn = b.isbn AND bc.availability = 'Available') as available_count
-          FROM book b LEFT JOIN bookcategory cat ON b.categoryid = cat.category
-          LIMIT 12";
-            $result = $conn->query($query);
-
+            $bookModel = new BookModel();
+            $result = $bookModel->getHomeBooks(12);
+            
             ?>
 
             <div class="container mt-5">
@@ -64,11 +50,10 @@
                                             </div>
                                         <?php endif; ?>
 
-                                        <img src="coverimg/<?php echo $book['coverimg']; ?>" class="img-fluid" alt="Book Cover"
-                                            class="rounded-3">
+                                        <img src='coverimg/<?php echo $book["coverimg"]; ?>' class="img-fluid rounded-3" alt="<?php echo htmlspecialchars($book['bookname']); ?>">
                                         <h5 class="card-title fw-bold"><?php echo $book['bookname']; ?></h5>
                                         <h6 class="card-subtitle fw-bold mb-3">by <?php echo $book['author']; ?></h6>
-                                        <p>Category: <?php echo $book['category']; ?></p>
+                                        <p>Category: <?php echo $book['category_name']; ?></p>
                                         <p>ISBN: <?php echo $book['isbn']; ?></p>
                                         <div class="d-flex justify-content-center align-items-center">
                                             <hr class="w-75">
