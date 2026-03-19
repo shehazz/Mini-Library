@@ -1,71 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Manager</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="public/assets/css/dashboradstyle.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 </head>
+<body class="bg-light">
 
-<body>
-    <div class="container my-4">
-        <div class="row">
-            <h2>Book Management</h2>
+    <nav class="navbar navbar-dark bg-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="bi bi-journal-bookmark-fill me-2"></i>Book Manager</a>
         </div>
-        <div class="row">
-            <div
-                class="d-flex flex-wrap align-items-center justify-content-between gap-3 p-3 bg-white rounded shadow-sm">
+    </nav>
 
-                <div class="d-flex flex-grow-1 align-items-center gap-3" style="min-width: 300px;">
-                    <div class="input-group">
-                        <span class="input-group-text bg-transparent border-end-0">
-                            <i class="bi bi-search text-muted"></i>
-                        </span>
-                        <input type="text" class="form-control border-start-0 ps-0 shadow-none"
-                            placeholder="Search by Title, Author, ISBN...">
-                    </div>
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Inventory Overview</h2>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBookModal">
+                <i class="bi bi-plus-lg"></i> Add New Book
+            </button>
+        </div>
 
-                    <div class="d-none d-lg-flex gap-3 text-secondary small text-nowrap align-items-center">
-                        <div class="dropdown">
-                            <span class="cursor-pointer dropdown-toggle" data-bs-toggle="dropdown">
-                                <i class="bi bi-filter me-1"></i> Category
-                            </span>
-                            <ul class="dropdown-menu shadow-sm">
-                                <li><a class="dropdown-item" href="#">Fiction</a></li>
-                                <li><a class="dropdown-item" href="#">Science</a></li>
-                            </ul>
-                        </div>
-                        <span class="cursor-pointer"><i class="bi bi-check-circle me-1"></i> Available</span>
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="card text-white bg-primary mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Books</h5>
+                        <p class="card-text fs-2">1,240</p>
                     </div>
                 </div>
-
-                <div class="d-flex gap-2">
-                    <a href="index.php?action=add-book" class="btn btn-teal px-3 shadow-none">
-                        <i class="bi bi-plus-lg me-1"></i> Add Book
-                    </a>
-
-                    <a href="index.php?action=return-book" class="btn px-3 shadow-none"
-                        style="background-color: #DCFCE7; color: #166534; border: 1px solid #BBF7D0;">
-                        <i class="bi bi-arrow-return-left me-1"></i> Return Book
-                    </a>
-
-                    <a href="../Views/editbook.php" class="btn px-3 shadow-none"
-                        style="background-color: #E0F2FE; color: #0369A1; border: 1px solid #BAE6FD;">
-                        <i class="bi bi-pencil-square me-1"></i> Edit Book
-                    </a>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Available</h5>
+                        <p class="card-text fs-2">856</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-warning mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Borrowed</h5>
+                        <p class="card-text fs-2">384</p>
+                    </div>
                 </div>
             </div>
         </div>
 
-    </div>
-    </div>
-    <div class="row mt-4">
-        <div class="col-12">
-            <?php include '../Includes/booktable.php'; ?>
+        <div class="card shadow-sm">
+            <div class="card-header bg-white py-3">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h5 class="mb-0">Book List</h5>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control form-control-sm" placeholder="Search by title or author...">
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>ISBN</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Category</th>
+                                <th>Status</th>
+                                <th class="text-end">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>978-0143127550</td>
+                                <td><strong>The Martian</strong></td>
+                                <td>Andy Weir</td>
+                                <<td>Sci-Fi</td>
+                                <td><span class="badge bg-success">In Stock</span></td>
+                                <td class="text-end">
+                                    <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>978-0062315007</td>
+                                <td><strong>The Alchemist</strong></td>
+                                <td>Paulo Coelho</td>
+                                <td>Fiction</td>
+                                <td><span class="badge bg-warning text-dark">Lent Out</span></td>
+                                <td class="text-end">
+                                    <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                                    <button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

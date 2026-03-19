@@ -93,7 +93,7 @@
                             <label class="form-label small fw-bold text-muted">UPLOAD COVER PAGE</label>
                             <div class="p-4 text-center"
                                 style="border: 2px dashed #E2E8F0; border-radius: 12px; background-color: #F8FAF9;">
-                                <i class="bi bi-cloud-arrow-up fs-1" style="color: #728C63;"></i>
+                                <i class="bi bi-cloud-arrow-up fs-1" style="color: #34495E;"></i>
                                 <input type="file" name="coverimg" class="form-control mt-3 shadow-none"
                                     accept="image/*" onblur="validate()" oninput="validate()">
                             </div>

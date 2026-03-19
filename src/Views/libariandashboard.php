@@ -95,7 +95,7 @@ require_once __DIR__ . '/../Controllers/OverdueBookController.php';
                     <li class="nav-item"><button class="nav-link custom-tab" data-bs-toggle="tab"
                             data-bs-target="#register" type="button">Register Member</button></li>
                     <li class="nav-item"><button class="nav-link custom-tab" data-bs-toggle="tab"
-                            data-bs-target="#issuebook" type="button">Reserve Book</button></li>
+                            data-bs-target="#issuebook" type="button">Issue Book</button></li>
                     <li class="nav-item"><button class="nav-link custom-tab" data-bs-toggle="tab"
                             data-bs-target="#returnbook" type="button">Return Book</button></li>
                 </ul>
@@ -108,9 +108,9 @@ require_once __DIR__ . '/../Controllers/OverdueBookController.php';
                     <div class="tab-pane fade" id="register" role="tabpanel">
                         <?php include __DIR__ . '/registerstudent.php'; ?></div>
                     <div class="tab-pane fade" id="issuebook" role="tabpanel">
-                        <?php include __DIR__ . '/reservebook.php'; ?></div>
+                        <?php include __DIR__ . '/issuebook.php'; ?></div>
                     <div class="tab-pane fade" id="returnbook" role="tabpanel">
-                        <?php include __DIR__ . '/returnbook.php'; ?></div>
+                        <?php include __DIR__ . '/returnedbook.php'; ?></div>
                 </div>
             </div>
         </div>
