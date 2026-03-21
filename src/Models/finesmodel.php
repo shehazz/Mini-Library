@@ -1,4 +1,5 @@
 <?php
+
 require_once '../../Config/DBConnection.php';
 
 class FineModel {
@@ -19,4 +20,5 @@ class FineModel {
         return $this->db->query($sql);
     }
 }
+
 ?>
