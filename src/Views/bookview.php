@@ -24,10 +24,12 @@ include '../Controllers/bookviewcontroller.php';
             <div class="col-md-4 col-lg-3">
                 <div class="bookcard shadow border-0 rounded-4 overflow-hidden">
 
-                    <img src="coverimg/<?php echo $book['coverimg']; ?>" class="img-fluid" alt="Book Cover">
+                    <img src="data:image/jpeg;base64,<?php echo base64_encode($book['coverimg']); ?>"
+                        class="img-fluid rounded-4" alt="<?php echo htmlspecialchars($book['bookname']); ?>">
 
-                    <div class="card-body text-center">
-                        <a href="../Views/reservebook.php?isbn=<?php echo urlencode($book['isbn']); ?>" class="text-decoration-none">
+                    <div class="card-body mt-3 text-center">
+                        <a href="../Views/reservebook.php?isbn=<?php echo urlencode($book['isbn']); ?>"
+                            class="text-decoration-none">
                             <?php if (($book['available_count'] ?? 0) > 0): ?>
                                 <button class="borrowbtn rounded-pill">Borrow</button>
                             <?php else: ?>
@@ -76,20 +78,26 @@ include '../Controllers/bookviewcontroller.php';
             </div>
 
             <div class="row row-cols-2 row-cols-md-4 g-5 ">
-                <?php for ($i = 0; $i < 4; $i++): ?>
+                <?php foreach ($relatedBooks as $related): ?>
                     <div class="col">
                         <div class="bookcard h-100 border-0 shadow-sm rounded-4 text-center p-3">
-                            <img src="coverimg/<?php echo $book['coverimg']; ?>" class="img-fluid" alt="Book Cover"
-                                class="rounded-3">
+
+                            <img src="data:image/jpeg;base64,<?php echo base64_encode($related['coverimg']); ?>"
+                                class="img-fluid rounded-3" alt="Book Cover">
+
                             <div class="card-body pt-0 text-center">
-                                <small class="d-block fw-bold mt-3 text1"><?php echo htmlspecialchars($book['bookname']); ?></small>
-                                <small class="text-muted d-block mb-1 text2">by <?php echo htmlspecialchars($book['author']); ?></small>
-                                <a href="../Views/reservebook.php?isbn=<?php echo urlencode($book['isbn']); ?>"><button
-                                        class="borrowbtn rounded-pill mt-2">Borrow</button></a>
+                                <small
+                                    class="d-block fw-bold mt-3 text1"><?php echo htmlspecialchars($related['bookname']); ?></small>
+                                <small class="text-muted d-block mb-1 text2">by
+                                    <?php echo htmlspecialchars($related['author']); ?></small>
+
+                                <a href="../Views/reservebook.php?isbn=<?php echo urlencode($related['isbn']); ?>">
+                                    <button class="borrowbtn rounded-pill mt-2">Borrow</button>
+                                </a>
                             </div>
                         </div>
                     </div>
-                <?php endfor; ?>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
