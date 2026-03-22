@@ -15,19 +15,38 @@ include '../Controllers/bookviewcontroller.php';
 </head>
 
 <body>
-    <div class="coverpage d-flex align-items-center justify-content-center">
-        <h1 class="display-4 fw-bold text-uppercase"><i class="bi bi-journal-richtext"></i> Test Book</h1>
+    <div class="coverpage">
+        <div class="cover-bg"
+            style="background-image: url('data:image/jpeg;base64,<?php echo base64_encode($book['coverimg']); ?>');">
+        </div>
+        <div class="cover-overlay"></div>
+        <div class="clear-card-wrapper d-none d-md-flex">
+            <div class="clear-card shadow-lg">
+                <img src="data:image/jpeg;base64,<?php echo base64_encode($book['coverimg']); ?>"
+                    alt="Book Cover Image">
+            </div>
+        </div>
+
+        <div class="text-card-wrapper d-flex align-items-center">
+            <div class="text-card">
+                <span class="d-block text-white-50 mb-2 fs-6"><?php echo htmlspecialchars($book['category']); ?></span>
+                <h1 class="display-3 fw-bold text-white bname mb-2"><?php echo htmlspecialchars($book['bookname']); ?>
+                </h1>
+                <p class="text-white mb-0 lh-lg">Immerse yourself in the pages and enjoy reading this book, just as you would within the peaceful walls of a library.</p>
+            </div>
+        </div>
     </div>
 
     <div class="container overlap-content pb-5">
         <div class="row g-4">
             <div class="col-md-4 col-lg-3">
-                <div class="bookcard shadow border-0 rounded-4 overflow-hidden">
+                <div class="bookcard shadow-sm">
+                    <div class="image-container">
+                        <img src="data:image/jpeg;base64,<?php echo base64_encode($book['coverimg']); ?>"
+                            alt="<?php echo htmlspecialchars($book['bookname']); ?>">
+                    </div>
 
-                    <img src="data:image/jpeg;base64,<?php echo base64_encode($book['coverimg']); ?>"
-                        class="img-fluid rounded-4" alt="<?php echo htmlspecialchars($book['bookname']); ?>">
-
-                    <div class="card-body mt-3 text-center">
+                    <div class="card-body-fixed">
                         <a href="../Views/reservebook.php?isbn=<?php echo urlencode($book['isbn']); ?>"
                             class="text-decoration-none">
                             <?php if (($book['available_count'] ?? 0) > 0): ?>
@@ -72,7 +91,8 @@ include '../Controllers/bookviewcontroller.php';
         <div class="pt-1">
             <div class="d-flex justify-content-between align-items-end mb-4">
                 <h4 class="fw-bold text1 mb-0">More books in this category...</h4>
-                <a href="#" class="text-decoration-none text2 fw-semibold">
+                <a href="categoryview.php?categoryid=<?php echo $book['categoryid']; ?>"
+                    class="text-decoration-none text2 fw-semibold">
                     View All <i class="bi bi-chevron-double-right"></i>
                 </a>
             </div>
@@ -80,6 +100,7 @@ include '../Controllers/bookviewcontroller.php';
             <div class="row row-cols-2 row-cols-md-4 g-5 ">
                 <?php foreach ($relatedBooks as $related): ?>
                     <div class="col">
+                        <a href='bookview.php?isbn=<?php echo $related["isbn"]; ?>' class="text-decoration-none">
                         <div class="bookcard h-100 border-0 shadow-sm rounded-4 text-center p-3">
 
                             <img src="data:image/jpeg;base64,<?php echo base64_encode($related['coverimg']); ?>"
@@ -96,6 +117,7 @@ include '../Controllers/bookviewcontroller.php';
                                 </a>
                             </div>
                         </div>
+                        </a>
                     </div>
                 <?php endforeach; ?>
             </div>
