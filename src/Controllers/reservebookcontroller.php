@@ -70,7 +70,7 @@ class ReserveController
         $book['bookprice'] = $book['bookprice'] ?? 0.00;
         $book['fineamount'] = $book['bookprice'] * 0.05;
         $book['dailyrate'] = 5;
-        $book['coverimg'] = "../../public/assets/images/coverimg/" . ($book['coverimg'] ?? 'default.jpg');
+        //$book['coverimg'] = "../../public/assets/images/coverimg/" . ($book['coverimg'] ?? 'default.jpg');
 
         return $book;
     }

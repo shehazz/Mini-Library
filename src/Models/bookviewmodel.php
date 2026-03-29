@@ -3,22 +3,39 @@ require_once '../../Config/DBConnection.php';
 
 class BookModel extends DBConnection
 {
-   public function getBookByIsbn($isbn)
-{
-    $conn = $this->getConnection();
+    public function getBookByIsbn($isbn)
+    {
+        $conn = $this->getConnection();
 
-    $sql = "SELECT b.*, c.category, 
+        $sql = "SELECT b.*, c.category, 
             (SELECT COUNT(*) FROM bookcopies bc 
              WHERE bc.isbn = b.isbn AND bc.availability = 'Available') as available_count
             FROM book b 
             LEFT JOIN bookcategory c ON b.categoryid = c.categoryid 
             WHERE b.isbn = ?";
 
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $isbn);
-    $stmt->execute();
-    return $stmt->get_result()->fetch_assoc();
-}
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $isbn);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
+    }
+
+    public function getAvailableBooksByCategory($categoryId)
+    {
+        $conn = $this->getConnection();
+        $sql = "SELECT b.*, c.category, 
+            (SELECT COUNT(*) FROM bookcopies bc 
+             WHERE bc.isbn = b.isbn AND bc.availability = 'Available') as available_count
+            FROM book b
+            JOIN bookcategory c ON b.categoryid = c.categoryid
+            WHERE b.categoryid = ? 
+            HAVING available_count > 0";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $categoryId);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
 
     public function getBooksByCategory($categoryId, $excludeIsbn, $limit = 4)
     {
@@ -35,7 +52,7 @@ class BookModel extends DBConnection
         $conn->begin_transaction();
 
         try {
-            $returndate = null; 
+            $returndate = null;
             $fineamount = 0.00;
             $paymentstatus = 'Pending';
 
@@ -59,7 +76,7 @@ class BookModel extends DBConnection
             $stmt3 = $conn->prepare($sql3);
             $stmt3->bind_param("s", $isbn);
             $stmt3->execute();
-            
+
             if ($stmt3->affected_rows === 0) {
                 throw new Exception("No physical copies available");
             }
