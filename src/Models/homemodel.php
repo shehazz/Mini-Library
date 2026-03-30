@@ -2,7 +2,8 @@
 
 require_once '../../Config/DBConnection.php';
 
-class BookModel extends DBConnection {
+class BookModel extends DBConnection
+{
     public $conn;
 
     public function __construct()
@@ -11,8 +12,10 @@ class BookModel extends DBConnection {
         $this->conn = $this->getConnection();
     }
 
-    public function getHomeBooks($limit = 12) {
+    public function getHomeBooks($limit = 12)
+    {
         $query = "SELECT
+                    b.coverimg,
                     b.bookname,
                     b.author,
                     b.isbn,
@@ -29,5 +32,3 @@ class BookModel extends DBConnection {
         return false;
     }
 }
-
-?>
