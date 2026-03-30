@@ -28,33 +28,23 @@
 
             $bookModel = new BookModel();
             $result = $bookModel->getHomeBooks(12);
-            
+
             ?>
 
             <div class="container mt-5">
                 <div class="row">
                     <?php while ($book = $result->fetch_assoc()): ?>
-                        <div class="col-lg-3 col-md-6 col-sm-12 g-4">
+                        <div class="col-lg-2 col-md-3 col-sm-6 g-4">
 
                             <a href="bookview.php?isbn=<?php echo $book['isbn']; ?>" class="text-decoration-none text-dark">
-                                <div class="card h-100 shadow rounded-4" id="card">
+                                <div class="card shadow rounded-4" id="card">
                                     <div class="card-body">
 
-                                        <?php if ($book['available_count'] > 0): ?>
-                                            <div>
-                                                <span class="badge bg-success">Available</span>
-                                            </div>
-                                        <?php else: ?>
-                                            <div>
-                                                <span class="badge bg-danger">Issued</span>
-                                            </div>
-                                        <?php endif; ?>
-
-                                        <img src='coverimg/<?php echo $book["coverimg"]; ?>' class="img-fluid rounded-3" alt="<?php echo htmlspecialchars($book['bookname']); ?>">
+                                        <img src='data:image/jpeg;base64,<?php echo base64_encode($book["coverimg"]); ?>' class="img-fluid rounded-3" id="cover-img">
                                         <h5 class="card-title fw-bold"><?php echo $book['bookname']; ?></h5>
-                                        <h6 class="card-subtitle fw-bold mb-3">by <?php echo $book['author']; ?></h6>
-                                        <p>Category: <?php echo $book['category_name']; ?></p>
-                                        <p>ISBN: <?php echo $book['isbn']; ?></p>
+                                        <!-- <h6 class="card-subtitle fw-bold mb-3">by <?php echo $book['author']; ?></h6> -->
+                                        <!-- <p>Category: <?php echo $book['category_name']; ?></p> -->
+                                        <!-- <p>ISBN: <?php echo $book['isbn']; ?></p> -->
                                         <div class="d-flex justify-content-center align-items-center">
                                             <hr class="w-75">
                                         </div>
@@ -63,12 +53,12 @@
                             <?php if ($book['available_count'] > 0): ?>
                                 <div class="d-flex justify-content-center align-items-center w-auto">
                                     <a href="reservebook.php?isbn=<?php echo $book['isbn']; ?>" class="text-decoration-none">
-                                        <button class="btn btn-sm rounded-5 px-5" id="borrowbtn">Borrow</button>
+                                        <button class="btn btn-sm rounded-4 px-5" id="borrowbtn">Borrow</button>
                                     </a>
                                 </div>
                             <?php else: ?>
                                 <div class="d-flex justify-content-center align-items-center w-auto">
-                                    <button class="btn btn-sm rounded-5 px-5" id="notavailablebtn" disabled>Not Available</button>
+                                    <button class="btn btn-sm rounded-4 px-5" id="notavailablebtn" disabled>Not Available</button>
                                 </div>
                             <?php endif; ?>
 
