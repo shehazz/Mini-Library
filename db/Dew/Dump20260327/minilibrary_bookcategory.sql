@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.43, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.45, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: minilibrary
 -- ------------------------------------------------------
--- Server version	5.5.5-10.4.32-MariaDB
+-- Server version	5.5.5-10.4.24-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,31 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `bookcopies`
+-- Table structure for table `bookcategory`
 --
 
-DROP TABLE IF EXISTS `bookcopies`;
+DROP TABLE IF EXISTS `bookcategory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `bookcopies` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `isbn` varchar(13) NOT NULL,
-  `copyid` int(11) NOT NULL,
-  `availability` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `isbn` (`isbn`),
-  CONSTRAINT `isbn` FOREIGN KEY (`isbn`) REFERENCES `book` (`isbn`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `bookcategory` (
+  `categoryid` int(11) NOT NULL AUTO_INCREMENT,
+  `category` varchar(45) NOT NULL,
+  PRIMARY KEY (`categoryid`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `bookcopies`
+-- Dumping data for table `bookcategory`
 --
 
-LOCK TABLES `bookcopies` WRITE;
-/*!40000 ALTER TABLE `bookcopies` DISABLE KEYS */;
-INSERT INTO `bookcopies` VALUES (11,'1234567891234',111111,'reserved'),(12,'1234567891234',111112,'reserved');
-/*!40000 ALTER TABLE `bookcopies` ENABLE KEYS */;
+LOCK TABLES `bookcategory` WRITE;
+/*!40000 ALTER TABLE `bookcategory` DISABLE KEYS */;
+INSERT INTO `bookcategory` VALUES (1,'Novel'),(2,'Fiction'),(3,'History'),(4,'Biography'),(5,'Science');
+/*!40000 ALTER TABLE `bookcategory` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-03-03  9:57:05
+-- Dump completed on 2026-03-27 15:11:55
