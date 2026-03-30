@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.43, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.45, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: minilibrary
 -- ------------------------------------------------------
--- Server version	5.5.5-10.4.32-MariaDB
+-- Server version	5.5.5-10.4.24-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,26 +16,37 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `fines`
+-- Table structure for table `borrowdetails`
 --
 
-DROP TABLE IF EXISTS `fines`;
+DROP TABLE IF EXISTS `borrowdetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `fines` (
-  `id` int(11) NOT NULL,
-  `dailyrate` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE `borrowdetails` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nic` varchar(12) NOT NULL,
+  `isbn` varchar(13) NOT NULL,
+  `duedate` date NOT NULL,
+  `returndate` date NOT NULL,
+  `fineamount` varchar(45) NOT NULL,
+  `paymentstatus` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_nic` (`nic`),
+  KEY `idx_isbn` (`isbn`),
+  KEY `isbn` (`isbn`),
+  KEY `nic` (`nic`),
+  CONSTRAINT `borrow_b_isbn` FOREIGN KEY (`isbn`) REFERENCES `book` (`isbn`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `nic` FOREIGN KEY (`nic`) REFERENCES `user` (`nic`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `fines`
+-- Dumping data for table `borrowdetails`
 --
 
-LOCK TABLES `fines` WRITE;
-/*!40000 ALTER TABLE `fines` DISABLE KEYS */;
-/*!40000 ALTER TABLE `fines` ENABLE KEYS */;
+LOCK TABLES `borrowdetails` WRITE;
+/*!40000 ALTER TABLE `borrowdetails` DISABLE KEYS */;
+/*!40000 ALTER TABLE `borrowdetails` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -47,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-03-03  9:57:05
+-- Dump completed on 2026-03-27 15:11:56
