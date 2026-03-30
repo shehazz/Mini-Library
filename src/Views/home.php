@@ -34,15 +34,20 @@
             <div class="container mt-5">
                 <div class="row">
                     <?php while ($book = $result->fetch_assoc()): ?>
-                        <div class="col-lg-2 col-md-3 col-sm-6 g-4">
+
+                        <div class="bcard col-lg-2 col-md-3 col-sm-6 g-4">
 
                             <a href="bookview.php?isbn=<?php echo $book['isbn']; ?>" class="text-decoration-none text-dark">
                                 <div class="card shadow rounded-4" id="card">
                                     <div class="card-body">
 
-                                        <img src='data:image/jpeg;base64,<?php echo base64_encode($book["coverimg"]); ?>' class="img-fluid rounded-3" id="cover-img">
-                                        <h5 class="card-title fw-bold"><?php echo $book['bookname']; ?></h5>
-                                        <!-- <h6 class="card-subtitle fw-bold mb-3">by <?php echo $book['author']; ?></h6> -->
+                                        <div class="card bg-dark text-white d-flex align-items-end">
+                                            <img src='data:image/jpeg;base64,<?php echo base64_encode($book["coverimg"]); ?>' class="img-fluid rounded-3" id="cover-img">
+                                            <div class="card-img-overlay shadow-lg d-flex flex-column justify-content-end">
+                                                <h5 class="card-title fw-bold shadow-lg"><?php echo $book['bookname']; ?></h5>
+                                                <p class="card-subtitle text-light shadow-lg">by <?php echo $book['author']; ?></p>
+                                            </div>
+                                        </div>
                                         <!-- <p>Category: <?php echo $book['category_name']; ?></p> -->
                                         <!-- <p>ISBN: <?php echo $book['isbn']; ?></p> -->
                                         <div class="d-flex justify-content-center align-items-center">
@@ -53,12 +58,12 @@
                             <?php if ($book['available_count'] > 0): ?>
                                 <div class="d-flex justify-content-center align-items-center w-auto">
                                     <a href="reservebook.php?isbn=<?php echo $book['isbn']; ?>" class="text-decoration-none">
-                                        <button class="btn btn-sm rounded-4 px-5" id="borrowbtn">Borrow</button>
+                                        <button class="borrow-btn btn btn-sm rounded-4 px-5" id="borrowbtn">Borrow</button>
                                     </a>
                                 </div>
                             <?php else: ?>
                                 <div class="d-flex justify-content-center align-items-center w-auto">
-                                    <button class="btn btn-sm rounded-4 px-5" id="notavailablebtn" disabled>Not Available</button>
+                                    <button class="borrow-btn btn btn-sm rounded-4 px-5" id="notavailablebtn" disabled>Not Available</button>
                                 </div>
                             <?php endif; ?>
 
