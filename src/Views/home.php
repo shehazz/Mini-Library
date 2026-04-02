@@ -35,7 +35,7 @@
                 <div class="row">
                     <?php while ($book = $result->fetch_assoc()): ?>
 
-                        <div class="bcard col-lg-2 col-md-3 col-sm-6">
+                        <div class="bcard col-lg-2 col-md-3 gy-4 col-sm-6">
 
                             <a href="bookview.php?isbn=<?php echo $book['isbn']; ?>" class="text-decoration-none text-dark">
                                 <div class="card shadow rounded-4" id="card">
